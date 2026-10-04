@@ -1,6 +1,6 @@
 # StackOrcs — one-page showcase
 
-A compact, independent showcase for `https://profile.stackorcs.com`.
+A compact, independent showcase for `https://studio.stackorcs.com`.
 
 ## Run locally
 
@@ -15,7 +15,7 @@ Project copy and links live in `app.js`. The default ModaStitch content is also 
 - ModaStitch and MeetGrid: captures of the live public sites.
 - Rivixa: capture of the actual built frontend in the existing local Rivixa repository. A full-size preview is linked because a confirmed public company URL was unavailable.
 - ChatSaver: capture of the actual public application.
-- StackOrcs: the original bear mark, displayed in white with CSS. No invented customer counts, revenue claims, testimonials or delivery metrics.
+- StackOrcs: the exact supplied orange bear mark with its original colors. No invented customer counts, revenue claims, testimonials or delivery metrics.
 
 Tabs support arrow keys, Home and End. Project hashes (for example `/#rivixa`) open the selected project directly. Sharing preserves the selected project and supports native share, clipboard and a selectable link fallback.
 
@@ -33,13 +33,13 @@ Run `npx vercel --prod --yes` from this folder. `.vercelignore` excludes credent
 
 The production fallback is https://stackorcs-onepage.vercel.app.
 
-The custom domain `profile.stackorcs.com` is attached and ownership is verified. Add this DNS record with your domain provider:
+The custom domain `studio.stackorcs.com` is the selected public domain. Attach it to this Vercel project, then use the DNS target shown by Vercel. The previous project target was:
 
 | Type | Name | Target |
 | --- | --- | --- |
-| CNAME | profile | 3f7f9d210260a13e.vercel-dns-017.com |
+| CNAME | studio | 3f7f9d210260a13e.vercel-dns-017.com |
 
-Use the provider's default TTL. The active nameservers are `apollo.dns-parking.com` and `athena.dns-parking.com`. Add the record in the DNS zone served by those nameservers; a record in an inactive registrar DNS zone will not resolve. After propagation, run `npx vercel domains verify profile.stackorcs.com --scope vivekgotstacks-projects`. The page and social preview use the intended custom domain.
+Use the provider's default TTL. The active nameservers are `apollo.dns-parking.com` and `athena.dns-parking.com`. Add the record in the DNS zone served by those nameservers; a record in an inactive registrar DNS zone will not resolve. After propagation, run `npx vercel domains verify studio.stackorcs.com --scope vivekgotstacks-projects`. The page and social preview use the intended custom domain.
 
 Public production checks returned HTTP 200 for the page and social image, and the production browser rendered the expected project and contact controls.
 
