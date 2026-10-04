@@ -31,9 +31,9 @@ The Vercel project is `stackorcs-onepage` in `vivekgotstacks-projects`. It build
 
 Run `npx vercel --prod --yes` from this folder. `.vercelignore` excludes credentials, verification files, scripts and original capture PNGs. The shipped page includes optimized WebP project previews. Header, favicon and social previews use the exact supplied StackOrcs.png logo without color filters.
 
-The production fallback is https://stackorcs-onepage.vercel.app.
+The production fallback is https://stackorcs-profile.vercel.app.
 
-The custom domain `studio.stackorcs.com` is the selected public domain. Attach it to this Vercel project, then use the DNS target shown by Vercel. The previous project target was:
+The custom domain `studio.stackorcs.com` is attached to this project and ownership is verified. Use the exact DNS target shown by Vercel in the active DNS zone. The project CNAME target is:
 
 | Type | Name | Target |
 | --- | --- | --- |
