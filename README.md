@@ -29,7 +29,7 @@ Source repository: https://github.com/StackOrcs/Profile.
 
 The Vercel project is `stackorcs-onepage` in `vivekgotstacks-projects`. It builds from the root of this standalone repository. Deployments currently use the Vercel CLI. Automatic Git deployments require the Vercel GitHub App to have access to `StackOrcs/Profile` in the organization's GitHub settings.
 
-Run `npx vercel --prod --yes` from this folder. `.vercelignore` excludes credentials, verification files, scripts and original capture PNGs. The shipped page includes optimized WebP previews and a 1200 × 630 social card.
+Run `npx vercel --prod --yes` from this folder. `.vercelignore` excludes credentials, verification files, scripts and original capture PNGs. The shipped page includes optimized WebP project previews. Header, favicon and social previews use the exact supplied StackOrcs.png logo without color filters.
 
 The production fallback is https://stackorcs-onepage.vercel.app.
 
