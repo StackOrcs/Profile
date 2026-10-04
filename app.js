@@ -7,11 +7,40 @@ const projects = {
 const tabs = [...document.querySelectorAll('.project-tab')];
 const keys = Object.keys(projects);
 const byId = id => document.getElementById(id);
-let request = 0;
+const media = document.querySelector('.project-media');
+const images = new Map([...media.querySelectorAll('img')].map(image => [image.dataset.project, image]));
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let activeProject = 'modastitch';
+let detailAnimation;
+function updateMediaState() {
+  const image = images.get(activeProject);
+  const pending = !image.classList.contains('is-ready');
+  media.classList.toggle('is-loading', pending);
+  media.classList.toggle('is-error', image.dataset.failed === 'true');
+  media.setAttribute('aria-busy', String(pending && image.dataset.failed !== 'true'));
+  byId('preview-status').textContent = image.dataset.failed === 'true' ? 'Preview unavailable. Use the project link below.' : 'Loading project preview…';
+}
+// Keep the actual image elements mounted and decode once, before any tab click.
+images.forEach(image => {
+  const ready = async () => {
+    try { await image.decode(); } catch { if (!image.naturalWidth) return failed(); }
+    image.classList.add('is-ready');
+    delete image.dataset.failed;
+    if (image.dataset.project === activeProject) updateMediaState();
+  };
+  const failed = () => {
+    image.dataset.failed = 'true';
+    if (image.dataset.project === activeProject) updateMediaState();
+  };
+  image.addEventListener('load', ready, {once:true});
+  image.addEventListener('error', failed, {once:true});
+  if (image.complete) { if (image.naturalWidth) ready(); else failed(); }
+});
+updateMediaState();
 function chooseProject(key, updateUrl = true) {
   const data = projects[key]; if(!data) return;
-  request++;
-  const current = request;
+  const changed = activeProject !== key;
+  activeProject = key;
   tabs.forEach(tab => {const selected=tab.dataset.project===key;tab.classList.toggle('active',selected);tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1;});
   byId('project-panel').setAttribute('aria-labelledby','tab-'+key);
   byId('project-title').textContent=data.title;
@@ -25,8 +54,20 @@ function chooseProject(key, updateUrl = true) {
   byId('project-tags').replaceChildren(...data.tags.map(tag=>{const li=document.createElement('li');li.textContent=tag;return li;}));
   document.querySelector('.work-count').textContent=`0${keys.indexOf(key)+1} / 04`;
   document.querySelector('.preview-stage').dataset.theme=key;
-  const preload = new Image(); preload.onload=()=>{if(current!==request)return;byId('project-image').src=data.image;byId('project-image').alt=data.alt;};preload.src=data.image;
-  const panel=byId('project-panel');panel.classList.remove('changing');void panel.offsetWidth;panel.classList.add('changing');
+  images.forEach((image, imageKey) => {
+    const selected = imageKey === key;
+    image.classList.toggle('is-active', selected);
+    image.setAttribute('aria-hidden', String(!selected));
+    image.fetchPriority = selected ? 'high' : 'auto';
+  });
+  updateMediaState();
+  if (changed && !reducedMotion.matches) {
+    detailAnimation?.cancel();
+    detailAnimation = document.querySelector('.project-detail').animate(
+      [{transform:'translateY(5px)'}, {transform:'translateY(0)'}],
+      {duration:150, easing:'cubic-bezier(.2,.75,.25,1)'}
+    );
+  }
   if(updateUrl) history.replaceState(null,'','#'+key);
 }
 tabs.forEach((tab,index)=>{
@@ -35,6 +76,51 @@ tabs.forEach((tab,index)=>{
 });
 const fromHash=()=>{const key=location.hash.slice(1);if(projects[key])chooseProject(key,false);};
 fromHash();window.addEventListener('hashchange',fromHash);
+// Native motion: no library download, no render loop, and no delayed image fade.
+const art = document.querySelector('.stack-sculpture');
+const artArea = document.querySelector('.brand-art');
+let tiltFrame;
+if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  artArea.addEventListener('pointermove', event => {
+    if (reducedMotion.matches) return;
+    const bounds = artArea.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - .5;
+    const y = (event.clientY - bounds.top) / bounds.height - .5;
+    cancelAnimationFrame(tiltFrame);
+    tiltFrame = requestAnimationFrame(() => {
+      art.style.setProperty('--tilt-x', `${-y * 12}deg`);
+      art.style.setProperty('--tilt-y', `${x * 16}deg`);
+    });
+  });
+  artArea.addEventListener('pointerleave', () => {
+    cancelAnimationFrame(tiltFrame);
+    art.style.removeProperty('--tilt-x');
+    art.style.removeProperty('--tilt-y');
+  });
+}
+const revealTargets = document.querySelectorAll('.capability, .contact-band');
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    if (!reducedMotion.matches) entry.target.animate(
+      [{transform:'translateY(14px)', opacity:.6}, {transform:'translateY(0)', opacity:1}],
+      {duration:420, easing:'cubic-bezier(.2,.75,.25,1)'}
+    );
+    revealObserver.unobserve(entry.target);
+  });
+}, {threshold:.15});
+revealTargets.forEach(target => revealObserver.observe(target));
+document.addEventListener('visibilitychange', () => {
+  document.documentElement.classList.toggle('motion-paused', document.hidden);
+});
+reducedMotion.addEventListener('change', () => {
+  if (reducedMotion.matches) {
+    detailAnimation?.cancel();
+    revealTargets.forEach(target => target.getAnimations().forEach(animation => animation.cancel()));
+    art.style.removeProperty('--tilt-x');
+    art.style.removeProperty('--tilt-y');
+  }
+});
 let toastTimer;
 function showToast(message){const status=byId('share-status');status.textContent=message;status.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>status.classList.remove('visible'),3500);}
 function shareUrl(){const url=new URL(location.href);url.search='';return url.href;}

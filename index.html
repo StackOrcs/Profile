@@ -22,6 +22,9 @@
   <link rel="icon" href="assets/StackOrcs.png" type="image/png">
   <link rel="preload" href="assets/manrope.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/modastitch.webp" as="image">
+  <link rel="preload" href="assets/rivixa.webp" as="image">
+  <link rel="preload" href="assets/meetgrid.webp" as="image">
+  <link rel="preload" href="assets/chatsaver.webp" as="image">
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
@@ -64,7 +67,13 @@
           <div class="project-panel" id="project-panel" role="tabpanel" aria-labelledby="tab-modastitch" tabindex="0">
             <div class="preview-stage" data-theme="modastitch">
               <div class="preview-label"><span class="preview-dot" aria-hidden="true"></span><span id="preview-kind">COMMERCE PLATFORM</span><span class="actual-screen">ACTUAL PROJECT SCREEN</span></div>
-              <div class="browser-frame"><div class="browser-bar"><span class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></span><span id="browser-label">modastitch.com</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5z"/></svg></div><img id="project-image" src="assets/modastitch.webp" alt="ModaStitch ecommerce website with clothing collections and shopping navigation" width="1440" height="900" fetchpriority="high"></div>
+              <div class="browser-frame"><div class="browser-bar"><span class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></span><span id="browser-label">modastitch.com</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5z"/></svg></div><div class="project-media" aria-busy="false">
+                <span class="preview-status" id="preview-status">Loading project preview…</span>
+                <img id="project-image" class="project-image is-active" data-project="modastitch" src="assets/modastitch.webp" alt="Actual ModaStitch clothing storefront with shopping navigation and collection imagery" width="1440" height="900" loading="eager" decoding="async" fetchpriority="high">
+                <img class="project-image" data-project="rivixa" src="assets/rivixa.webp" alt="Actual Rivixa Lifesciences website with clinical imagery and product catalogue" width="1440" height="900" loading="eager" decoding="async" aria-hidden="true">
+                <img class="project-image" data-project="meetgrid" src="assets/meetgrid.webp" alt="Actual MeetGrid website with team availability and room scheduling" width="1440" height="900" loading="eager" decoding="async" aria-hidden="true">
+                <img class="project-image" data-project="chatsaver" src="assets/chatsaver.webp" alt="Actual ChatSaver interface with ChatGPT import and vault recovery" width="1440" height="900" loading="eager" decoding="async" aria-hidden="true">
+              </div></div>
               <div class="project-stamp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6"/></svg>BUILT BY STACKORCS</div>
             </div>
             <div class="project-detail"><div class="project-heading"><div><span class="project-category" id="project-category">ECOMMERCE / CLIENT WORK</span><h3 id="project-title">ModaStitch</h3></div><a class="project-link" id="project-link" href="https://modastitch.com" target="_blank" rel="noopener noreferrer" aria-label="Visit ModaStitch website"><span id="project-link-label">Visit project</span><span aria-hidden="true">↗</span></a></div><p id="project-description">A clothing storefront with product discovery, cart and checkout, inventory controls, and an admin workspace.</p><ul class="project-tags" id="project-tags" aria-label="Work delivered"><li>Storefront & checkout</li><li>Inventory & admin</li><li>Customer analytics</li></ul></div>

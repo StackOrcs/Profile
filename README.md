@@ -19,6 +19,10 @@ Project copy and links live in `app.js`. The default ModaStitch content is also 
 
 Tabs support arrow keys, Home and End. Project hashes (for example `/#rivixa`) open the selected project directly. Sharing preserves the selected project and supports native share, clipboard and a selectable link fallback.
 
+All four project previews preload at startup and remain mounted and decoded. Switching changes the visible image immediately, without starting a new image request or waiting for a fade. On a slow initial connection, the selected preview shows a loading state rather than the previous project's image. Preview markup and alt text live in `index.html`.
+
+Native browser motion adds pointer-driven 3D sculpture tilt, floating layers, SVG tracing, button sheen, tab accents and section reveals. Reduced-motion preferences disable these effects; continuous CSS motion pauses when the tab is hidden. No motion framework or WebGL runtime is downloaded.
+
 ## Contact
 
 Project contact opens `https://stackorcs.com/contact`. Direct email uses `info@stackorcs.com`, the public branded sender in the existing StackOrcs source. LinkedIn and the original site are linked directly. No unfinished enquiry backend is presented as functional.
