@@ -1,8 +1,6 @@
-# StackOrcs — Your Next Orbit
+# StackOrcs Studio — Built with Intent
 
-A fourteen-chapter, scroll-controlled digital odyssey for studio.stackorcs.com. The business story moves from ambition through strategy, experience, engineering, cloud, AI, security and operations into four actual projects, partnership and a new conversation.
-
-The full script, chapter purpose, screen copy, visual direction, evidence and transitions are in [STORY_SCRIPT.md](STORY_SCRIPT.md). Longer narrative passages are the creative master; the screen presents concise copy and visual scenes. There is no prerecorded video or audio narration.
+An independent, fourteen-chapter editorial experience for studio.stackorcs.com. The connected story moves from ambition and clarity through design, engineering, infrastructure, AI and trust into actual work and a direct conversation. [STORY_SCRIPT.md](STORY_SCRIPT.md) contains the narrative, business purpose, concise screen copy and creative direction for each chapter.
 
 ## Run and build
 
@@ -12,24 +10,30 @@ npm run build
 npm run dev
 ```
 
-The local server defaults to http://127.0.0.1:4173. Set PORT to change it. HTML, CSS and core project interactions are served directly. Three.js and GSAP are bundled by esbuild into experience.js and versioned chunks under assets/. Run the build after changing src/; commit generated bundles along with their source. The checked-in output can be served as a static site without a platform build step.
+The server defaults to http://127.0.0.1:4173; PORT changes it. The production output is static HTML, CSS and locally bundled JavaScript. Rebuild after editing src/ and commit the generated experience.js and hashed assets alongside source. No framework migration or hosting change is needed.
 
-## Story and motion
+## Creative system
 
-- Black curtains open through native scrolling onto an original procedural 3D rocket with the supplied bear logo, planets, stars and an orbit.
-- Fourteen chapters have direct navigation, a progress indicator and a gradual rise of warm light. Visitors control the pace and can skip directly to work or contact.
-- GSAP handles scene transitions and reveals. Three.js uses one canvas, a small procedural scene, capped pixel density and a 30 fps mobile / 60 fps desktop rendering target. Slow rendering lowers pixel density; hidden pages and manual pause stop continuous rendering.
-- Device reduced-motion settings disable optional motion downloads. A CSS rocket remains available when WebGL is unavailable. Semantic content and links work without the enhanced scene.
-- The exact original assets/StackOrcs.png supplies the header, favicon, social image and rocket decal. It is not replaced or recolored.
+GetLayers' [Lumora studio reference](https://www.getlayers.ai/layer/lumora) informed the large editorial wordmark, restrained palette, media-led project compositions and controlled transitions. The implementation is custom to StackOrcs; no premium template source or unrelated model is used. The original bear, actual captures and fourteen-chapter business narrative remain the substance of the experience.
 
-## Projects and contact
+- Typography and composition lead: asymmetric charcoal openings, paper editorial chapters, service rows and large real-project spreads.
+- WebGL serves two directed scenes: a material portrait of the original bear identity and an exploded-layer design sequence. The subject rotates around one anchor. No particles or unrelated space assets are included.
+- The actual PNG is unchanged. scripts/trace-brand.py derives contour geometry from its orange pixels; src/brand-contours.json records the source hash. Beveled extrusion, chrome edges, graphite layers and photographic softbox reflections provide depth.
+- GSAP creates word masks, measured entrances, scroll-controlled typography, perspective media and image reveals. Native scrolling and CSS sticky composition keep the pace under visitor control.
+- Three.js renders on demand. It stops when nothing changes, when its scenes are absent, when the page is hidden or motion is paused. Pixel density is capped and adapts to slow rendering. Targets are 60 fps desktop / 30 fps mobile while changing. Device reduced-motion settings skip optional animation downloads; semantic content works independently.
 
-Actual captures show ModaStitch, Rivixa, MeetGrid and ChatSaver. Rivixa links to its website preview because a confirmed public URL was unavailable. Descriptions and links live in app.js; default project markup and image alt text live in index.html. All four previews load and decode once, remain mounted and switch without waiting for a fade or another image request. Tabs support arrows, Home and End, and direct project hashes such as /#rivixa.
+## Editable direction
 
-WhatsApp uses https://wa.me/918303165648. Instagram and X use the stackorcs handle; LinkedIn uses the stackorcs company page. The page also links to the original StackOrcs site, its contact page, service directory and trust pages. No enquiry backend or fabricated business results are claimed.
+src/config.js holds reveal timing, easing, scrub, perspective, camera FOV/position, exposure, density, scale, separation and directed poses. CSS variables hold colors and typography. Add ?tune=1 to the local preview URL for opt-in sliders; save chosen values back to the config. The panel is absent by default and does not persist changes.
+
+The modules separate orchestration (experience), timelines (motion/editorial), text masks (text), media interaction (media), physical scene (scene), controls and configuration. Business content remains semantic HTML; project data lives in app.js. This is a static site, not a single large framework component.
+
+## Work and contact
+
+Actual captures show ModaStitch, Rivixa, MeetGrid and ChatSaver. Rivixa links to its captured website because a confirmed public URL was unavailable. All four previews load, decode once and stay mounted for immediate switching. Tabs support arrows, Home and End; project hashes such as /#rivixa remain shareable.
+
+WhatsApp: https://wa.me/918303165648. Instagram and X use stackorcs; LinkedIn uses the StackOrcs company page. Main-site, contact, service and trust links remain direct. No invented client statistics or performance outcomes are presented.
 
 ## Publication
 
-Source: https://github.com/StackOrcs/Profile. This change is published to GitHub only. Hosting and domain settings are managed separately; updating this repository does not imply a production deployment. The canonical URL is https://studio.stackorcs.com.
-
-The existing static-site configuration is retained. Optional dependencies are served locally, with no runtime CDN or third-party tracking. Verification artifacts and node_modules are excluded from Git.
+Repository: https://github.com/StackOrcs/Profile. Canonical: https://studio.stackorcs.com. This revision is pushed to GitHub only; Vercel settings and deployment are separate. Verification artifacts and node_modules remain outside Git.

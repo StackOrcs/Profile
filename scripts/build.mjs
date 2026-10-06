@@ -11,7 +11,7 @@ const result = await build({
 const outputs = new Set(Object.keys(result.metafile.outputs).map(file=>path.resolve(root,file)));
 const assetRoot = path.join(root,'assets');
 for (const file of await fs.readdir(assetRoot)) {
-  if (!/^(scene|motion|chunk)-[A-Z0-9]{8}\.js(?:\.LEGAL\.txt)?$/.test(file)) continue;
+  if (!/^(scene|motion|controls|chunk)-[A-Z0-9]{8}\.js(?:\.LEGAL\.txt)?$/.test(file)) continue;
   const target = path.resolve(assetRoot,file);
   const related = target.endsWith('.LEGAL.txt') ? target.slice(0,-10) : target;
   if (!outputs.has(target) && !outputs.has(related) && path.dirname(target)===assetRoot) await fs.unlink(target);
