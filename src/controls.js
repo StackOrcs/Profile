@@ -2,7 +2,7 @@ import {scene,motion} from './config.js';
 export function initControls(){
   const panel=document.createElement('details');panel.className='direction-controls';panel.open=true;
   const title=document.createElement('summary');title.textContent='Art direction';panel.append(title);
-  const controls=[['Camera FOV',scene,'fov',25,55,1],['Exposure',scene,'exposure',.5,2,.01],['Subject scale',scene,'desktopScale',.6,1.5,.01],['Layer separation',scene,'layerSeparation',0,2.4,.01],['Reveal duration',motion,'revealDuration',.3,2,.05],['Media tilt',motion,'mediaTilt',0,12,.5]];
+  const controls=[['Camera FOV',scene,'fov',25,55,1],['Exposure',scene,'exposure',.5,2,.01],['Subject scale',scene,'desktopScale',.6,1.5,.01],['Layer separation',scene,'layerSeparation',0,2.4,.01],['Scroll follow',scene,'scrollDamping',10,45,1],['Reveal duration',motion,'revealDuration',.2,2,.05],['Media tilt',motion,'mediaTilt',0,12,.5]];
   controls.forEach(([name,object,key,min,max,step])=>{
     const label=document.createElement('label');const text=document.createElement('span');text.textContent=name;
     const output=document.createElement('output');output.textContent=object[key];

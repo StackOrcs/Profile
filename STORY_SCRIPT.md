@@ -147,11 +147,11 @@
 
 **Screen:** “Science. Made clear.”
 
-**Full narrative:** Specialist information needs a structure that helps people find their way. Rivixa's healthcare company website presents three therapeutic areas, a searchable catalogue with 146 product records, and product enquiry flows. The project connects company information with practical product discovery. Clear navigation, search, and filters make the information more accessible. The experience is shown through an actual capture of the built frontend. It is a company and catalogue website; the story does not turn it into a clinical application or claim patient outcomes.
+**Full narrative:** Specialist information needs a structure that helps people find their way. Rivixa's current healthcare company website presents three therapeutic areas and nine branded ophthalmology products, with searchable details, local packaging PDFs and professional enquiry flows. The project connects company information with practical product discovery. The showcase uses a fresh browser capture of the current built frontend, including its scientist-and-laboratory homepage. It is a company and catalogue website; the story does not turn it into a clinical application or claim patient outcomes.
 
 **Direction:** An asymmetric editorial spread places the actual healthcare website beside concise context and verified feature details. A clipped image reveal opens the screen. No decorative 3D model competes with the work.
 
-**Evidence:** 146 product records. Search and filters. Company information and enquiries.
+**Evidence:** Nine branded ophthalmology products. Search, filters and local packaging PDFs. Company information and professional enquiries. Current local export from Rivixa commit 9f96734, captured in the browser on 6 October 2026.
 
 **Visitor action:** Open the full-size website preview. A public company domain is not invented.
 
