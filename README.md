@@ -1,52 +1,35 @@
-# StackOrcs — one-page showcase
+# StackOrcs — Your Next Orbit
 
-A compact, independent showcase for `https://studio.stackorcs.com`.
+A fourteen-chapter, scroll-controlled digital odyssey for studio.stackorcs.com. The business story moves from ambition through strategy, experience, engineering, cloud, AI, security and operations into four actual projects, partnership and a new conversation.
 
-## Run locally
+The full script, chapter purpose, screen copy, visual direction, evidence and transitions are in [STORY_SCRIPT.md](STORY_SCRIPT.md). Longer narrative passages are the creative master; the screen presents concise copy and visual scenes. There is no prerecorded video or audio narration.
 
-`npm run dev` serves the page at `http://127.0.0.1:4173`.
+## Run and build
 
-Plain HTML, CSS and JavaScript; self-hosted Manrope; no runtime dependencies or external trackers. CSS and SVG provide the restrained motion. Reduced-motion preferences are respected.
+```sh
+npm ci
+npm run build
+npm run dev
+```
 
-## Content
+The local server defaults to http://127.0.0.1:4173. Set PORT to change it. HTML, CSS and core project interactions are served directly. Three.js and GSAP are bundled by esbuild into experience.js and versioned chunks under assets/. Run the build after changing src/; commit generated bundles along with their source. The checked-in output can be served as a static site without a platform build step.
 
-Project copy and links live in `app.js`. The default ModaStitch content is also in `index.html` for a useful first render without JavaScript. Change both if updating the default project.
+## Story and motion
 
-- ModaStitch and MeetGrid: captures of the live public sites.
-- Rivixa: capture of the actual built frontend in the existing local Rivixa repository. A full-size preview is linked because a confirmed public company URL was unavailable.
-- ChatSaver: capture of the actual public application.
-- StackOrcs: the exact supplied orange bear mark with its original colors. No invented customer counts, revenue claims, testimonials or delivery metrics.
+- Black curtains open through native scrolling onto an original procedural 3D rocket with the supplied bear logo, planets, stars and an orbit.
+- Fourteen chapters have direct navigation, a progress indicator and a gradual rise of warm light. Visitors control the pace and can skip directly to work or contact.
+- GSAP handles scene transitions and reveals. Three.js uses one canvas, a small procedural scene, capped pixel density and a 30 fps mobile / 60 fps desktop rendering target. Slow rendering lowers pixel density; hidden pages and manual pause stop continuous rendering.
+- Device reduced-motion settings disable optional motion downloads. A CSS rocket remains available when WebGL is unavailable. Semantic content and links work without the enhanced scene.
+- The exact original assets/StackOrcs.png supplies the header, favicon, social image and rocket decal. It is not replaced or recolored.
 
-Tabs support arrow keys, Home and End. Project hashes (for example `/#rivixa`) open the selected project directly. Sharing preserves the selected project and supports native share, clipboard and a selectable link fallback.
+## Projects and contact
 
-All four project previews preload at startup and remain mounted and decoded. Switching changes the visible image immediately, without starting a new image request or waiting for a fade. On a slow initial connection, the selected preview shows a loading state rather than the previous project's image. Preview markup and alt text live in `index.html`.
+Actual captures show ModaStitch, Rivixa, MeetGrid and ChatSaver. Rivixa links to its website preview because a confirmed public URL was unavailable. Descriptions and links live in app.js; default project markup and image alt text live in index.html. All four previews load and decode once, remain mounted and switch without waiting for a fade or another image request. Tabs support arrows, Home and End, and direct project hashes such as /#rivixa.
 
-Native browser motion adds pointer-driven 3D sculpture tilt, floating layers, SVG tracing, button sheen, tab accents and section reveals. Reduced-motion preferences disable these effects; continuous CSS motion pauses when the tab is hidden. No motion framework or WebGL runtime is downloaded.
+WhatsApp uses https://wa.me/918303165648. Instagram and X use the stackorcs handle; LinkedIn uses the stackorcs company page. The page also links to the original StackOrcs site, its contact page, service directory and trust pages. No enquiry backend or fabricated business results are claimed.
 
-## Contact
+## Publication
 
-Project contact opens `https://stackorcs.com/contact`. Direct email uses `info@stackorcs.com`, the public branded sender in the existing StackOrcs source. LinkedIn and the original site are linked directly. No unfinished enquiry backend is presented as functional.
+Source: https://github.com/StackOrcs/Profile. This change is published to GitHub only. Hosting and domain settings are managed separately; updating this repository does not imply a production deployment. The canonical URL is https://studio.stackorcs.com.
 
-## Deploy
-
-Source repository: https://github.com/StackOrcs/Profile.
-
-The Vercel project is `stackorcs-onepage` in `vivekgotstacks-projects`. It builds from the root of this standalone repository. Deployments currently use the Vercel CLI. Automatic Git deployments require the Vercel GitHub App to have access to `StackOrcs/Profile` in the organization's GitHub settings.
-
-Run `npx vercel --prod --yes` from this folder. `.vercelignore` excludes credentials, verification files, scripts and original capture PNGs. The shipped page includes optimized WebP project previews. Header, favicon and social previews use the exact supplied StackOrcs.png logo without color filters.
-
-The production fallback is https://stackorcs-profile.vercel.app.
-
-The custom domain `studio.stackorcs.com` is attached to this project and ownership is verified. Use the exact DNS target shown by Vercel in the active DNS zone. The project CNAME target is:
-
-| Type | Name | Target |
-| --- | --- | --- |
-| CNAME | studio | 3f7f9d210260a13e.vercel-dns-017.com |
-
-Use the provider's default TTL. The active nameservers are `apollo.dns-parking.com` and `athena.dns-parking.com`. Add the record in the DNS zone served by those nameservers; a record in an inactive registrar DNS zone will not resolve. After propagation, run `npx vercel domains verify studio.stackorcs.com --scope vivekgotstacks-projects`. The page and social preview use the intended custom domain.
-
-Public production checks returned HTTP 200 for the page and social image, and the production browser rendered the expected project and contact controls.
-
-## Verification
-
-The showcase passed browser checks for four project tabs and image loads, keyboard navigation, project deep links, clipboard sharing, 320–1920px layouts, reduced motion, contact targets, and no JavaScript or missing-resource errors. Generated screenshots and workstation-specific capture scripts are retained locally outside the repository. Production has no runtime dependencies.
+The existing static-site configuration is retained. Optional dependencies are served locally, with no runtime CDN or third-party tracking. Verification artifacts and node_modules are excluded from Git.

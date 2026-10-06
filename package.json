@@ -2,5 +2,14 @@
   "name": "stackorcs-onepage",
   "version": "1.0.0",
   "private": true,
-  "scripts": { "dev": "node scripts/serve.mjs", "start": "node scripts/serve.mjs" }
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "esbuild": "0.28.2",
+    "gsap": "3.15.0",
+    "three": "0.186.1"
+  }
 }

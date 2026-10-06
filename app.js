@@ -61,7 +61,7 @@ function chooseProject(key, updateUrl = true) {
     image.fetchPriority = selected ? 'high' : 'auto';
   });
   updateMediaState();
-  if (changed && !reducedMotion.matches) {
+  if (changed && !reducedMotion.matches && !document.body.classList.contains('motion-off')) {
     detailAnimation?.cancel();
     detailAnimation = document.querySelector('.project-detail').animate(
       [{transform:'translateY(5px)'}, {transform:'translateY(0)'}],
@@ -70,62 +70,19 @@ function chooseProject(key, updateUrl = true) {
   }
   if(updateUrl) history.replaceState(null,'','#'+key);
 }
+
+document.addEventListener('experience:motion', event => {if (event.detail.paused) detailAnimation?.cancel();});
 tabs.forEach((tab,index)=>{
   tab.addEventListener('click',()=>chooseProject(tab.dataset.project));
   tab.addEventListener('keydown',event=>{let next;if(event.key==='ArrowRight')next=(index+1)%tabs.length;if(event.key==='ArrowLeft')next=(index-1+tabs.length)%tabs.length;if(event.key==='Home')next=0;if(event.key==='End')next=tabs.length-1;if(next===undefined)return;event.preventDefault();tabs[next].focus();chooseProject(tabs[next].dataset.project);});
 });
-const fromHash=()=>{const key=location.hash.slice(1);if(projects[key])chooseProject(key,false);};
+const fromHash=()=>{const key=location.hash.slice(1);if(projects[key]){chooseProject(key,false);document.getElementById('work').scrollIntoView({behavior:'instant'});}};
 fromHash();window.addEventListener('hashchange',fromHash);
-// Native motion: no library download, no render loop, and no delayed image fade.
-const art = document.querySelector('.stack-sculpture');
-const artArea = document.querySelector('.brand-art');
-let tiltFrame;
-if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-  artArea.addEventListener('pointermove', event => {
-    if (reducedMotion.matches) return;
-    const bounds = artArea.getBoundingClientRect();
-    const x = (event.clientX - bounds.left) / bounds.width - .5;
-    const y = (event.clientY - bounds.top) / bounds.height - .5;
-    cancelAnimationFrame(tiltFrame);
-    tiltFrame = requestAnimationFrame(() => {
-      art.style.setProperty('--tilt-x', `${-y * 12}deg`);
-      art.style.setProperty('--tilt-y', `${x * 16}deg`);
-    });
-  });
-  artArea.addEventListener('pointerleave', () => {
-    cancelAnimationFrame(tiltFrame);
-    art.style.removeProperty('--tilt-x');
-    art.style.removeProperty('--tilt-y');
-  });
-}
-const revealTargets = document.querySelectorAll('.capability, .contact-band');
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    if (!reducedMotion.matches) entry.target.animate(
-      [{transform:'translateY(14px)', opacity:.6}, {transform:'translateY(0)', opacity:1}],
-      {duration:420, easing:'cubic-bezier(.2,.75,.25,1)'}
-    );
-    revealObserver.unobserve(entry.target);
-  });
-}, {threshold:.15});
-revealTargets.forEach(target => revealObserver.observe(target));
-document.addEventListener('visibilitychange', () => {
-  document.documentElement.classList.toggle('motion-paused', document.hidden);
-});
-reducedMotion.addEventListener('change', () => {
-  if (reducedMotion.matches) {
-    detailAnimation?.cancel();
-    revealTargets.forEach(target => target.getAnimations().forEach(animation => animation.cancel()));
-    art.style.removeProperty('--tilt-x');
-    art.style.removeProperty('--tilt-y');
-  }
-});
 let toastTimer;
 function showToast(message){const status=byId('share-status');status.textContent=message;status.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>status.classList.remove('visible'),3500);}
 function shareUrl(){const url=new URL(location.href);url.search='';return url.href;}
 async function copyLink(){try{await navigator.clipboard.writeText(shareUrl());showToast('Link copied. Ready to share.');if(byId('share-dialog').open)byId('share-dialog').close();}catch{byId('share-url').value=shareUrl();if(!byId('share-dialog').open)byId('share-dialog').showModal();byId('share-url').focus();byId('share-url').select();showToast('Select the link, then copy it.');}}
-byId('share-page').addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title:'StackOrcs — Good ideas. Real software.',text:'A quick look at what StackOrcs builds.',url:shareUrl()});return;}catch(error){if(error.name==='AbortError')return;}}await copyLink();});
+byId('share-page').addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title:'StackOrcs — Your next orbit.',text:'A digital odyssey, by StackOrcs.',url:shareUrl()});return;}catch(error){if(error.name==='AbortError')return;}}await copyLink();});
 byId('copy-share').addEventListener('click',copyLink);
 document.querySelector('.dialog-close').addEventListener('click',()=>byId('share-dialog').close());
 byId('share-dialog').addEventListener('click',event=>{if(event.target===byId('share-dialog')){const rect=event.target.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)event.target.close();}});
