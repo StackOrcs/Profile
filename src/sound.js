@@ -1,9 +1,7 @@
-const muteKey='stackorcs-sound-muted';
 export function initSound(){
   const toggle=document.getElementById('sound-toggle'),score=document.getElementById('score-audio');
   if(!toggle||!score)return;
   let enabled=true,blocked=false,pending=false;
-  try{enabled=localStorage.getItem(muteKey)!=='1';}catch{}
   const render=()=>{
     toggle.setAttribute('aria-pressed',String(enabled&&!score.paused));
     toggle.setAttribute('aria-label',blocked?'Start sound':enabled?'Turn sound off':'Turn sound on');
@@ -19,7 +17,6 @@ export function initSound(){
   toggle.addEventListener('click',()=>{
     if(enabled&&!blocked){enabled=false;score.autoplay=false;score.pause();}
     else{enabled=true;blocked=false;score.autoplay=true;start();}
-    try{localStorage.setItem(muteKey,enabled?'0':'1');}catch{}
     render();
   });
   document.addEventListener('pointerdown',gesture,{passive:true});
