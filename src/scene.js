@@ -92,10 +92,9 @@ export async function initScene({story,isPaused}) {
     if(Math.abs(pointer.y-targetY)<.00005)pointer.y=targetY;
     const endingActive=endingSection?.dataset.active==='true';
     const endingProgress=endingSection?Math.max(0,Math.min(1,Number(endingSection.dataset.progress||0))):0;
-    // The contact slot scrolls away before the finale pins on a phone.
-    // Give the existing sculpture its own visible, centered ending frame.
-    const stage=endingActive
-      ? {bounds:compact.matches?[.13,.14,.87,.86]:[.20,.12,.80,.88],opacity:1}
+    // Phones need a visible finale slot. Desktop retains the existing frame.
+    const stage=endingActive&&compact.matches
+      ? {bounds:[.13,.14,.87,.86],opacity:1}
       : getStage(compact.matches,compact.matches?target:s,host.clientHeight);
     const state=[s,pointer.x,pointer.y,settings.fov,settings.exposure,settings.desktopScale,settings.mobileScale,settings.layerSeparation,...stage.bounds,stage.opacity,focus,endingActive?1:0,endingProgress].map(n=>n.toFixed(5)).join('/');
     if(state===previousState)return false;
@@ -117,11 +116,19 @@ export async function initScene({story,isPaused}) {
     host.dataset.signal=signalState.progress.toFixed(3);
     systems.group.visible=direction.systems>.015;partnership.group.visible=direction.partnership>.015;
     identity.update(gap,direction.division);systems.update(direction.form,direction.systems,focus);partnership.update(Math.max(0,Math.min(1,s-12)),direction.partnership);
-    camera.fov=settings.fov;camera.updateProjectionMatrix();
+    camera.fov=settings.fov;camera.clearViewOffset();camera.updateProjectionMatrix();
     const bounds=fit(stage.bounds);
-    // Enlarge the existing assembly after fitting, so framing cannot cancel it.
     if(endingActive) {
-      sculpture.scale.multiplyScalar(THREE.MathUtils.lerp(1,compact.matches?4.8:9,endingProgress));
+      if(compact.matches) sculpture.scale.multiplyScalar(THREE.MathUtils.lerp(1,4.8,endingProgress));
+      else {
+        // Optical enlargement preserves the sculpture's proportions and depth.
+        // Anchor the camera crop to its current screen position, with no recenter.
+        const zoom=THREE.MathUtils.lerp(1,settings.endingZoom,THREE.MathUtils.smootherstep(endingProgress,0,1));
+        const width=host.clientWidth,height=host.clientHeight;
+        const anchorX=(bounds[0]+bounds[2])/2,anchorY=(bounds[1]+bounds[3])/2;
+        camera.setViewOffset(width,height,anchorX*width*(1-1/zoom),anchorY*height*(1-1/zoom),width/zoom,height/zoom);
+        host.dataset.endingZoom=zoom.toFixed(4);
+      }
     }
     host.dataset.bounds=bounds.map(n=>n.toFixed(4)).join(',');
     host.dataset.stage=stage.bounds.join(',');

@@ -7,7 +7,7 @@ export const scene = {
   fov:36, cameraZ:8.7, mobileCameraZ:8.5, desktopPixelRatio:1.75,
   mobilePixelRatio:1.25, desktopFps:60, mobileFps:60, exposure:1.12,
   desktopScale:1, mobileScale:.68, pointerDepth:.12, scrollDamping:24,
-  layerSeparation:1.4,
+  layerSeparation:1.4,endingZoom:9,
   desktopStage:[.54,.16,.94,.85], mobileStage:[.08,.58,.92,.92],
   // Chapter position → X/Y/Z rotation, scale, layer separation (radians).
   // One full identity turn; craft opens it into six parts. Subsequent actors
