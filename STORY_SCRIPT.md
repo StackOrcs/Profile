@@ -5,9 +5,9 @@
 
 **Format:** A long, user-controlled scroll film. The visitor controls the pace. No forced autoplay, scroll interception, timer, mandatory loading screen, or sound. Progress is expressed through composition, material depth, typography and transitions. The actual websites are the evidence.
 
-**Visual arc:** A material brand portrait completes a turn → its layers open → the identity divides into six parts → connected disciplines stack into infrastructure → a decision network closes into protection → four real projects take the entire stage → paired couplings express partnership → the original identity returns. Charcoal and warm paper provide contrast. Each transformation follows the business narrative; typography and real media remain central.
+**Visual arc:** A material brand portrait completes a turn → its layers open → the identity divides into six parts → connected disciplines stack into infrastructure → a decision network closes into protection → four real projects take the entire stage → paired couplings express partnership → the supplied black mark expands through a full-screen close → STACKORCS remains. Charcoal and warm paper provide contrast. Each transformation follows the business narrative; typography and real media remain central.
 
-**Brand:** The supplied orange bear image stays unchanged in the navigation, favicon and social preview. A contour-derived 3D relief uses that same outline throughout one directed sequence. No alternative logo is introduced.
+**Brand:** The supplied black-background bear mark appears in the navigation, favicon, social preview and final closing. The original orange PNG remains the contour source for the physical 3D relief and fragments. The two treatments share the same outline without introducing an unrelated logo.
 
 **How to read this document:** The full narrative below is the master script for the story and a possible future voice-over. The live experience uses the shorter screen lines and supporting copy; it does not play an audio narration. Each section's content remains available with animation disabled.
 
@@ -213,7 +213,7 @@
 
 **Full narrative:** Every project begins with context. The ambition. The constraints. The timing. The people who will use and operate the system. Bring those things to the conversation. StackOrcs will help find a clear next step. The journey does not end with this experience. It can continue with your product, your team, and the system you want to build.
 
-**Direction:** The linked forms resolve back to the original bear. Make the next thing matter closes the story in warm orange type. WhatsApp, the original site and social links stay direct and readable. At WhatsApp, the branded cursor becomes a heart: a small human response at a relevant action.
+**Direction:** The linked forms lead into a final handoff. The 3D sculpture fades, the supplied black mark grows until its field covers the screen, and the last state resolves to STACKORCS in warm orange type. WhatsApp, the original site and social links stay direct and readable. At WhatsApp, the branded cursor becomes a heart: a small human response at a relevant action.
 
 **Primary action:** Talk on WhatsApp — +91 8303165648.
 
