@@ -4,7 +4,6 @@ import {motion} from './config.js';
 import {splitWords} from './text.js';
 import {initMedia} from './media.js';
 import {directEditorial} from './editorial.js';
-import {initCursor} from './cursor.js';
 import {directSignal} from './signal.js';
 
 export function initMotion(isPaused){
@@ -12,7 +11,6 @@ export function initMotion(isPaused){
   document.querySelectorAll('.reveal-heading,.title-line').forEach(splitWords);
   const queries=gsap.matchMedia();let context;
   const cleanMedia=initMedia(isPaused);
-  const cleanCursor=initCursor(isPaused);
   const setup=()=>{
     context?.revert();document.body.classList.toggle('motion-enabled',!isPaused());
     if(isPaused())return;
@@ -43,5 +41,5 @@ export function initMotion(isPaused){
   queries.add('(prefers-reduced-motion:no-preference) and (min-width:761px)',()=>{setup();return()=>context?.revert();});
   queries.add('(prefers-reduced-motion:no-preference) and (max-width:760px)',()=>{setup();return()=>context?.revert();});
   document.addEventListener('experience:motion',setup);document.addEventListener('experience:direction',setup);
-  return()=>{queries.revert();context?.revert();cleanMedia();cleanCursor();document.removeEventListener('experience:motion',setup);document.removeEventListener('experience:direction',setup);};
+  return()=>{queries.revert();context?.revert();cleanMedia();document.removeEventListener('experience:motion',setup);document.removeEventListener('experience:direction',setup);};
 }
