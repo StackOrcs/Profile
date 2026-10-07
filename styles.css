@@ -133,3 +133,4 @@ body:not(.curtain-open){overflow:hidden}
 @media(max-width:760px){.sound-control{right:5%;bottom:12px}.sticky-socials{left:5%;right:5%;bottom:12px;gap:4px}.sticky-social{font-size:6px;padding:8px 8px;gap:5px}.sticky-social span{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.intro-curtain,.curtain-panel,.curtain-label,.curtain-valance{transition:none!important}.intro-curtain{display:none}body:not(.curtain-open){overflow:auto}}
 @media(prefers-reduced-motion:reduce){.closing-sequence{height:100svh}.closing-stage{background:#000}.closing-word{opacity:1;transform:none}.closing-line-main,.closing-line-kicker{transform:none}}
+.closing-optics{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0}.optics-ready .closing-optics{opacity:1}.optics-ready .closing-echo{visibility:hidden!important}.closing-word{z-index:2}@media(prefers-reduced-motion:reduce){.closing-optics{display:none}}

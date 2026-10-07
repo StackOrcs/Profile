@@ -1,8 +1,9 @@
 import {gsap} from 'gsap';
 import {ending as settings} from './config.js';
+import {createTypeOptics} from './type-optics.js';
 
 // A separate typographic coda follows the existing sculpture shot.
-// Scroll controls one reversible score; only transforms and opacity animate.
+// Scroll controls one reversible score plus a demand-rendered optical pass.
 export function directEnding(){
   const section=document.querySelector('.closing-sequence');
   if(!section)return()=>{};
@@ -16,7 +17,8 @@ export function directEnding(){
   section.classList.add('ending-enhanced');
   // Clear pixel transforms before rebuilding at a responsive breakpoint.
   gsap.set([word,prefix,name,kicker,rule,...glyphs,...echoes],{clearProps:'transform,opacity,visibility'});
-  const score=gsap.timeline({paused:true});
+  const optics=createTypeOptics(section,name);
+  const score=gsap.timeline({paused:true,onUpdate:()=>optics.render(score.progress())});
   score
     .fromTo(word,{autoAlpha:0,yPercent:10,scale:.94,rotationX:7},{autoAlpha:1,duration:.22,ease:'power2.out'},0)
     .to(word,{yPercent:0,scale:1,rotationX:0,duration:1.45,ease:'power3.out'},.1)
@@ -41,6 +43,6 @@ export function directEnding(){
   document.addEventListener('experience:scroll',update);
   return()=>{
     document.removeEventListener('experience:scroll',update);
-    follow.tween.kill();score.kill();section.classList.remove('ending-enhanced');
+    follow.tween.kill();score.kill();optics.destroy();section.classList.remove('ending-enhanced');
   };
 }

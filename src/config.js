@@ -7,7 +7,9 @@ export const ending = {
   approachViewport:.75,moveUntil:.28,zoomStart:.12,zoomEnd:.82,
   desktopZoom:9,mobileZoom:4.8,
   typeScreens:.85,typeStart:.82,typeFollow:.32,typeEase:'power3.out',
-  glyphDuration:.74,glyphStagger:.045,glyphEase:'power4.out'
+  glyphDuration:.74,glyphStagger:.045,glyphEase:'power4.out',
+  opticsPixelRatio:1.25,opticsStrength:.085,opticsBands:7,
+  mobileOpticsStrength:.035,mobileOpticsBands:3
 };
 export const scene = {
   fov:36, cameraZ:8.7, mobileCameraZ:8.5, desktopPixelRatio:1.75,
