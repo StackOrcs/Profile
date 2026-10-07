@@ -47,7 +47,9 @@ function update() {
     ending.style.setProperty('--ending-mark',(1-smooth(endingProgress,.72,.93)).toFixed(4));
     ending.style.setProperty('--ending-word',word.toFixed(4));
     ending.style.setProperty('--ending-ring',((1-word)*.7).toFixed(4));
-    ending.style.setProperty('--ending-bg',smooth(endingProgress,.58,.88).toFixed(4));
+    // Let the sculpture own the finale. Black arrives only for the final
+    // wordmark handoff so the bear cannot disappear behind an early blackout.
+    ending.style.setProperty('--ending-bg',smooth(endingProgress,.93,1).toFixed(4));
     ending.style.setProperty('--ending-y',((1-word)*18).toFixed(2)+'px');
     ending.style.setProperty('--ending-line-a',((1-word)*120).toFixed(2)+'px');
     ending.style.setProperty('--ending-line-b',((word-1)*120).toFixed(2)+'px');

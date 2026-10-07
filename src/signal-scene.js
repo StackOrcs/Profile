@@ -2,11 +2,10 @@ import * as THREE from 'three';
 import contours from './brand-contours.json' with {type:'json'};
 import slices from './signal-contours.json' with {type:'json'};
 import {signalConfig} from './signal-config.js';
-import {signalPerformance,wavePerformance} from './signal-state.js';
+import {signalPerformance} from './signal-state.js';
 const shapesOf=data=>data.map(item=>{const shape=new THREE.Shape(item.outline.map(point=>new THREE.Vector2(...point)));item.holes.forEach(ring=>shape.holes.push(new THREE.Path(ring.map(point=>new THREE.Vector2(...point)))));return shape;});
 
-// A silent, scroll-directed roar: interference gathers into the original bear,
-// its lower ribbons articulate, and three physical pressure fronts leave it.
+// Interference gathers into the original bear and holds its completed form.
 export function createSignal(materials){
   const group=new THREE.Group(),ribbons=new THREE.Group();group.add(ribbons);
   const silver=materials.enamel.clone();silver.roughness=.24;
@@ -23,11 +22,6 @@ export function createSignal(materials){
   const eyeMaterial=new THREE.MeshPhysicalMaterial({color:0xff6400,emissive:0xff5300,emissiveIntensity:.4,metalness:.55,roughness:.22,clearcoat:1,transparent:true,opacity:0,depthWrite:false});
   const eyeGeometry=new THREE.ExtrudeGeometry(shapesOf(contours.shapes.slice(1)),{depth:.025,bevelEnabled:true,bevelSize:.006,bevelThickness:.006,bevelSegments:3,curveSegments:1});eyeGeometry.translate(-.004,.008,0);
   const eyes=new THREE.Mesh(eyeGeometry,eyeMaterial);eyes.position.z=.12;group.add(eyes);
-  const waveGeometry=new THREE.TorusGeometry(1,.016,8,96,Math.PI*1.68);
-  const waves=Array.from({length:3},(_,index)=>{
-    const material=new THREE.MeshStandardMaterial({color:index===1?0xc77a39:0xff6500,emissive:0xd34d00,emissiveIntensity:.18,metalness:.62,roughness:.24,transparent:true,opacity:0,depthWrite:false});
-    const mesh=new THREE.Mesh(waveGeometry,material);mesh.rotation.set(-.18,.12,Math.PI*.16+index*.07);group.add(mesh);return mesh;
-  });
   // Stable framing lets the bear lean and breathe without the camera pumping.
   const proxy=new THREE.Mesh(new THREE.BoxGeometry(4.95,4.45,1.8),new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false,colorWrite:false}));group.add(proxy);
   return {group,update(progress,weight,parentPose){
@@ -47,10 +41,8 @@ export function createSignal(materials){
       carrierPose.scale.set((3.2+Math.sin(q*Math.PI)*1.35)*(1-performance.focus),1,1);carrierPose.updateMatrix();carriers.setMatrixAt(index,carrierPose.matrix);
     });
     if(carriers.visible){carriers.instanceMatrix.needsUpdate=true;carriers.computeBoundingBox();}
-    proxy.position.y=-performance.waveFrame*.12;
-    proxy.scale.set(1-performance.focus*.26+performance.waveFrame*.27,1-performance.focus*.17+performance.waveFrame*.29,1-performance.focus*.30);
+    proxy.scale.set(1-performance.focus*.26,1-performance.focus*.17,1-performance.focus*.30);
     eyes.scale.setScalar(performance.scale);eyes.position.y=-performance.jaw*.08;
     eyeMaterial.opacity=performance.focus*(.30+performance.breath*.70);eyeMaterial.emissiveIntensity=.35+performance.breath*.95;
-    waves.forEach((mesh,index)=>{const wave=wavePerformance(progress,index);mesh.visible=wave.opacity>.005;mesh.material.opacity=wave.opacity;mesh.scale.set(wave.radius,wave.radius*.96,wave.radius);mesh.position.set(0,-.22,.24+wave.depth);});
   }};
 }

@@ -31,7 +31,7 @@ export const scene = {
     {at:11,pose:[-.06,6.70,.02,1.08,0]},
     {at:12,pose:[.12,6.00,-.025,1.35,0]},
     {at:13,pose:[.06,6.46,.015,1.12,0]},
-    {at:14,pose:[.12,9.40,-.02,1.12,0]}
+    {at:14,pose:[.02,Math.PI*2,0,1.12,0]}
   ],
   // Generous sculpture stages. Project chapters deliberately yield to media.
   // Bounds are viewport fractions and interpolate as the story advances.

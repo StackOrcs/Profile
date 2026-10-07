@@ -92,7 +92,11 @@ export async function initScene({story,isPaused}) {
     if(Math.abs(pointer.y-targetY)<.00005)pointer.y=targetY;
     const endingActive=endingSection?.dataset.active==='true';
     const endingProgress=endingSection?Math.max(0,Math.min(1,Number(endingSection.dataset.progress||0))):0;
-    const stage=getStage(compact.matches,compact.matches?target:s,host.clientHeight);
+    // The contact slot scrolls away before the finale pins on a phone.
+    // Give the existing sculpture its own visible, centered ending frame.
+    const stage=endingActive
+      ? {bounds:compact.matches?[.13,.14,.87,.86]:[.20,.12,.80,.88],opacity:1}
+      : getStage(compact.matches,compact.matches?target:s,host.clientHeight);
     const state=[s,pointer.x,pointer.y,settings.fov,settings.exposure,settings.desktopScale,settings.mobileScale,settings.layerSeparation,...stage.bounds,stage.opacity,focus,endingActive?1:0,endingProgress].map(n=>n.toFixed(5)).join('/');
     if(state===previousState)return false;
     previousState=state;
@@ -115,9 +119,10 @@ export async function initScene({story,isPaused}) {
     identity.update(gap,direction.division);systems.update(direction.form,direction.systems,focus);partnership.update(Math.max(0,Math.min(1,s-12)),direction.partnership);
     camera.fov=settings.fov;camera.updateProjectionMatrix();
     const bounds=fit(stage.bounds);
-    // Keep the same sculpture centered by the normal stage framing; the finale
-    // only scales that existing group in place instead of introducing a second mark.
-    if(endingActive) sculpture.scale.multiplyScalar(1+endingProgress*(compact.matches?4.8:9));
+    // Enlarge the existing assembly after fitting, so framing cannot cancel it.
+    if(endingActive) {
+      sculpture.scale.multiplyScalar(THREE.MathUtils.lerp(1,compact.matches?4.8:9,endingProgress));
+    }
     host.dataset.bounds=bounds.map(n=>n.toFixed(4)).join(',');
     host.dataset.stage=stage.bounds.join(',');
     host.dataset.explosion=gap.toFixed(2);host.dataset.rotation=pose[1].toFixed(3);
