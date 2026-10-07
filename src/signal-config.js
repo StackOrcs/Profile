@@ -1,6 +1,6 @@
 // Only the “Less noise. More signal.” interlude uses these controls.
 export const signalConfig={
-  duration:7,scrollScreens:5.2,scrub:.16,bands:48,bandFill:.76,
+  duration:7,scrollScreens:1.55,scrub:.16,bands:48,bandFill:.76,
   noiseAmount:.62,noiseDepth:.78,jawTravel:.18,pulseStrength:.24,
   turn:.46,waveRadius:2.32,desktopStage:[.54,.13,.95,.88],
   beats:[{at:0,label:'Interference'},{at:.26,label:'Focus'},{at:.48,label:'Resonance'},{at:.76,label:'A clear signal'}]

@@ -78,7 +78,7 @@ body.sound-consent-pending{overflow:hidden}
 @media(hover:hover) and (pointer:fine){.cursor-ready #studio-cursor{opacity:1}.cursor-ready,.cursor-ready a,.cursor-ready button{cursor:none}.cursor-ready input,.cursor-ready textarea{cursor:text}}
 @media(prefers-reduced-motion:reduce){#studio-cursor{display:none}}.motion-off #studio-cursor{display:none}
 /* Chapter 03 only: a long, native-scroll score with a stationary composition. */
-#clarity{--signal-p:0;--signal-screens:5.2;display:block;height:calc(var(--signal-screens)*100svh);min-height:0;padding:0}
+#clarity{--signal-p:0;--signal-screens:1.55;display:block;height:calc(var(--signal-screens)*100svh);min-height:0;padding:0}
 #clarity .signal-pin{position:sticky;top:0;height:100svh;display:flex;align-items:center;padding:45px 8%;overflow:clip}
 #clarity .signal-copy{width:48%;max-width:48%;z-index:2}
 #clarity h2{font-size:clamp(62px,7.4vw,112px);line-height:.98;margin-bottom:24px}
@@ -98,6 +98,19 @@ body.sound-consent-pending{overflow:hidden}
 .motion-off #clarity .signal-fallback-art{display:none}
 @media(prefers-reduced-motion:reduce){#clarity{height:auto}#clarity .signal-pin{position:relative;height:auto;min-height:100svh;padding-top:90px;padding-bottom:90px}#clarity .signal-question{position:relative;opacity:1!important;visibility:visible!important;transform:none!important}#clarity .signal-art-caption{display:none}}
 
+/* The story stays focused on the signal; chapter numbers return only through copy. */
+.chapter-nav{display:none!important}
+
+/* Keep the final sculpture and wordmark inside a phone viewport. */
+@media(max-width:760px){
+  #clarity .signal-pin{padding-left:7%;padding-right:7%}
+  #clarity .signal-art-caption{bottom:5%;font-size:5px}
+  .closing-word{font-size:clamp(32px,10.5vw,68px);letter-spacing:-.105em;max-width:90vw}
+  .closing-line-kicker{font-size:.23em;letter-spacing:.22em;margin-bottom:.9em}
+  .closing-line-main{letter-spacing:-.105em}
+  .closing-caption{font-size:5px}
+}
+
 /* Opening reveal: tailored fabric panels, not a flat loading screen. */
 body:not(.curtain-open){overflow:hidden}
 .intro-curtain{position:fixed;inset:0;z-index:110;pointer-events:auto;background:#151914;overflow:hidden;display:flex}
@@ -110,6 +123,7 @@ body:not(.curtain-open){overflow:hidden}
 
 /* Persistent controls: the journey keeps contact close without a progress HUD. */
 .sound-control{position:fixed;right:26px;bottom:22px;z-index:35}.sound-control button{pointer-events:auto;background:#121512e8;border:1px solid #4e5f413d;color:#b6bfaa;padding:10px 14px;font-size:9px;letter-spacing:.2px}.sound-control button>span{color:var(--orange);margin-left:10px}
+.score-audio,#score-audio{display:none}
 .sticky-socials{position:fixed;left:5%;bottom:21px;z-index:35;display:flex;align-items:center;gap:6px}.sticky-social{display:flex;align-items:center;gap:10px;padding:10px 13px;background:#121512e8;border:1px solid #4e5f413d;color:#b6bfaa;font-size:9px;letter-spacing:.35px}.sticky-social span{color:var(--orange);font-size:12px}.sticky-social:hover{color:#fff;border-color:#ff640066}
 
 /* The finale is the one rendered sculpture growing in place; no replacement mark. */

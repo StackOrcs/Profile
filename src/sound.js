@@ -7,6 +7,7 @@ export function initSound(){
   const enable=document.getElementById('sound-enable');
   const dismiss=document.getElementById('sound-dismiss');
   const toggle=document.getElementById('sound-toggle');
+  const score=document.getElementById('score-audio');
   if(!overlay||!enable||!dismiss||!toggle)return;
   const AudioContextClass=window.AudioContext||window.webkitAudioContext;
   let context=null,master=null,noiseBuffer=null,timer=null,nextTime=0,step=0,active=false;
@@ -70,13 +71,22 @@ export function initSound(){
     while(nextTime<context.currentTime+.12){scheduleStep(nextTime,step);nextTime+=stepDuration;step=(step+1)%32;}
   };
   const start=()=>{
-    if(active||!AudioContextClass)return;
+    if(active)return;
+    if(score){
+      active=true;score.volume=.22;score.currentTime=0;
+      const play=score.play();
+      if(play?.catch)play.catch(()=>{active=false;setButton();});
+      setButton();
+      return;
+    }
+    if(!AudioContextClass)return;
     active=true;context=new AudioContextClass();master=context.createGain();master.gain.value=.0001;master.connect(context.destination);makeNoise();
     const now=context.currentTime;master.gain.exponentialRampToValueAtTime(.18,now+.35);nextTime=now+.05;step=0;timer=setInterval(pump,25);pump();setButton();
   };
   const stop=()=>{
     if(!active)return;
     active=false;clearInterval(timer);timer=null;
+    if(score){score.pause();score.currentTime=0;}
     const oldContext=context,oldMaster=master;context=null;master=null;
     if(oldMaster&&oldContext){oldMaster.gain.cancelScheduledValues(oldContext.currentTime);oldMaster.gain.setValueAtTime(Math.max(.0001,oldMaster.gain.value),oldContext.currentTime);oldMaster.gain.exponentialRampToValueAtTime(.0001,oldContext.currentTime+.12);setTimeout(()=>oldContext.close(),220);}
     setButton();
@@ -85,6 +95,9 @@ export function initSound(){
   enable.addEventListener('click',()=>{writeChoice('enabled');setOverlay(false);start();});
   dismiss.addEventListener('click',()=>{writeChoice('dismissed');setOverlay(false);stop();});
   toggle.addEventListener('click',()=>{if(active){stop();writeChoice('dismissed');}else{start();writeChoice('enabled');}});
-  document.addEventListener('visibilitychange',()=>{if(master&&context){const time=context.currentTime;master.gain.cancelScheduledValues(time);master.gain.setTargetAtTime(document.hidden ? .0001 : .18,time,.04);}});
+  document.addEventListener('visibilitychange',()=>{
+    if(score)score.muted=document.hidden;
+    if(master&&context){const time=context.currentTime;master.gain.cancelScheduledValues(time);master.gain.setTargetAtTime(document.hidden ? .0001 : .18,time,.04);}
+  });
   return()=>{stop();enable.removeEventListener('click',start);dismiss.removeEventListener('click',stop);};
 }

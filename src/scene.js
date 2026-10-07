@@ -117,7 +117,7 @@ export async function initScene({story,isPaused}) {
     const bounds=fit(stage.bounds);
     // Keep the same sculpture centered by the normal stage framing; the finale
     // only scales that existing group in place instead of introducing a second mark.
-    if(endingActive) sculpture.scale.multiplyScalar(1+endingProgress*9);
+    if(endingActive) sculpture.scale.multiplyScalar(1+endingProgress*(compact.matches?4.8:9));
     host.dataset.bounds=bounds.map(n=>n.toFixed(4)).join(',');
     host.dataset.stage=stage.bounds.join(',');
     host.dataset.explosion=gap.toFixed(2);host.dataset.rotation=pose[1].toFixed(3);
