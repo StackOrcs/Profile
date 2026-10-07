@@ -5,6 +5,7 @@ import {splitWords} from './text.js';
 import {initMedia} from './media.js';
 import {directEditorial} from './editorial.js';
 import {directSignal} from './signal.js';
+import {directEnding} from './ending.js';
 
 export function initMotion(isPaused){
   gsap.registerPlugin(ScrollTrigger);ScrollTrigger.config({ignoreMobileResize:true});
@@ -17,6 +18,7 @@ export function initMotion(isPaused){
     context=gsap.context(()=>{
       directEditorial();
       directSignal();
+      const cleanEnding=directEnding();
       gsap.from('.title-line .word',{yPercent:105,rotation:.5,stagger:.035,duration:motion.revealDuration,ease:motion.revealEase});
       gsap.from('.hero-copy .kicker,.hero-copy .lede,.hero-actions',{y:12,opacity:0,stagger:.06,duration:.45,delay:.08,ease:'power3.out'});
       document.querySelectorAll('.reveal-heading').forEach(heading=>{
@@ -35,6 +37,7 @@ export function initMotion(isPaused){
       });
       gsap.from('.values-strip span',{y:20,opacity:0,stagger:.06,duration:.5,ease:'power3.out',scrollTrigger:{trigger:'.values-strip',start:'top 93%',once:true}});
       gsap.from('.social-links a',{y:10,opacity:0,stagger:.05,duration:.4,scrollTrigger:{trigger:'.social-links',start:'top 95%',once:true}});
+      return cleanEnding;
     });
     ScrollTrigger.refresh();
   };

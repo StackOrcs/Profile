@@ -6,6 +6,7 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const chapters = [...document.querySelectorAll('.story-act')];
 const chapterLinks = [...document.querySelectorAll('.chapter-nav a')];
 const ending = document.querySelector('.closing-sequence');
+ending?.style.setProperty('--ending-type-screens',endingSettings.typeScreens);
 let progress = 0;
 let storyPosition = 0;
 let tickPending = false;
@@ -39,13 +40,19 @@ function update() {
   });
   document.getElementById('scene-host').dataset.progress = progress.toFixed(3);
   if (ending) {
-    const travel=Math.max(1,ending.offsetHeight-innerHeight);
+    const baseScreens=parseFloat(getComputedStyle(ending).getPropertyValue('--ending-base-screens'));
+    const baseHeight=ending.offsetHeight*baseScreens/(baseScreens+endingSettings.typeScreens);
+    const travel=Math.max(1,baseHeight-innerHeight);
     const endingRect=ending.getBoundingClientRect();
     const endingProgress=clamp(-endingRect.top/travel);
+    const typeStart=travel*endingSettings.typeStart;
+    const typeTravel=Math.max(1,ending.offsetHeight-innerHeight-typeStart);
+    const typeProgress=isPaused()?1:clamp((-endingRect.top-typeStart)/typeTravel);
     const approach=clamp((innerHeight*endingSettings.approachViewport-endingRect.top)/(innerHeight*endingSettings.approachViewport+travel*endingSettings.moveUntil));
     const word=smooth(endingProgress,.82,.995);
     ending.dataset.progress=endingProgress.toFixed(4);
     ending.dataset.approach=approach.toFixed(4);
+    ending.dataset.typeProgress=typeProgress.toFixed(4);
     ending.style.setProperty('--ending-p',endingProgress.toFixed(4));
     ending.style.setProperty('--ending-scale',(0.5+endingProgress*12).toFixed(4));
     ending.style.setProperty('--ending-ring-scale',(0.35+endingProgress*3.2).toFixed(4));

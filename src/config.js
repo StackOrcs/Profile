@@ -5,7 +5,9 @@ export const motion = {
 };
 export const ending = {
   approachViewport:.75,moveUntil:.28,zoomStart:.12,zoomEnd:.82,
-  desktopZoom:9,mobileZoom:4.8
+  desktopZoom:9,mobileZoom:4.8,
+  typeScreens:.85,typeStart:.82,typeFollow:.32,typeEase:'power3.out',
+  glyphDuration:.74,glyphStagger:.045,glyphEase:'power4.out'
 };
 export const scene = {
   fov:36, cameraZ:8.7, mobileCameraZ:8.5, desktopPixelRatio:1.75,
