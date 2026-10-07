@@ -113,11 +113,11 @@ body.sound-consent-pending{overflow:hidden}
 
 /* Opening reveal: tailored fabric panels, not a flat loading screen. */
 body:not(.curtain-open){overflow:hidden}
-.intro-curtain{position:fixed;inset:0;z-index:110;pointer-events:auto;background:#151914;overflow:hidden;display:flex}
-.curtain-panel{position:absolute;top:0;bottom:0;width:52%;background:repeating-linear-gradient(90deg,#111510 0 3%,#2c3428 5%,#0c100d 8%,#242b21 12%,#10140f 15%);box-shadow:inset 0 0 100px #000b;transition:transform 1.15s cubic-bezier(.76,0,.24,1)}
+.intro-curtain{position:fixed;inset:0;z-index:110;pointer-events:auto;background:#150b06;overflow:hidden;display:flex}
+.curtain-panel{position:absolute;top:0;bottom:0;width:52%;background:repeating-linear-gradient(90deg,#120a06 0 3%,#3b1d0d 5%,#0b0806 8%,#2e1509 12%,#100906 15%);box-shadow:inset 0 0 100px #000b,inset 0 0 70px #ff64001a;transition:transform 1.15s cubic-bezier(.76,0,.24,1)}
 .curtain-panel-left{left:0;transform-origin:left center}.curtain-panel-right{right:0;transform-origin:right center}
-.curtain-panel i{position:absolute;inset:0;background:linear-gradient(90deg,#0008,transparent 20%,transparent 80%,#0009);opacity:.8}
-.curtain-valance{position:absolute;left:0;right:0;top:-4%;height:14%;background:radial-gradient(ellipse at center,#3b4931 0 30%,#151a14 66%,transparent 70%);opacity:.9;transition:opacity .35s 1s}
+.curtain-panel i{position:absolute;inset:0;background:linear-gradient(90deg,#0009,#ff64000a 25%,#ff64000a 75%,#000a);opacity:.8}
+.curtain-valance{position:absolute;left:0;right:0;top:-4%;height:14%;background:radial-gradient(ellipse at center,#a5410d 0 30%,#321607 66%,transparent 70%);opacity:.95;transition:opacity .35s 1s}
 .curtain-label{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;color:#f1eee7;font-size:clamp(22px,3.2vw,48px);font-weight:700;letter-spacing:.22em;text-shadow:0 0 28px #ff640055;white-space:nowrap;transition:opacity .3s .65s,transform .8s cubic-bezier(.2,.8,.2,1) .2s}
 .curtain-open .curtain-panel-left{transform:translateX(-97%)}.curtain-open .curtain-panel-right{transform:translateX(97%)}.curtain-open .curtain-label{opacity:0;transform:translate(-50%,-50%) scale(1.08);pointer-events:none}.curtain-open .curtain-valance{opacity:0}.curtain-open .intro-curtain{pointer-events:none}.curtain-finished .intro-curtain{opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
 
