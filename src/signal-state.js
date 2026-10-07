@@ -7,7 +7,7 @@ const clamp=value=>Math.max(0,Math.min(1,value));
 export function sampleSignal(story,sectionHeight,viewportHeight){
   if(story<2||story>=3)return {progress:0,weight:0};
   const progress=clamp((story-2)*sectionHeight/Math.max(1,sectionHeight-viewportHeight));
-  return {progress,weight:smooth(progress,0,.07)*(1-smooth(progress,.90,1))};
+  return {progress,weight:smooth(progress,0,.07)};
 }
 
 export function signalPerformance(progress){
