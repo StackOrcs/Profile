@@ -1,15 +1,15 @@
+import {initSound} from './sound.js';
+
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-const button = document.getElementById('motion-toggle');
 const chapters = [...document.querySelectorAll('.story-act')];
 const chapterLinks = [...document.querySelectorAll('.chapter-nav a')];
 const ending = document.querySelector('.closing-sequence');
-let manuallyPaused = false;
 let progress = 0;
 let storyPosition = 0;
 let tickPending = false;
 let sceneStarted = false;
 let motionStarted = false;
-const isPaused = () => reduced.matches || manuallyPaused;
+const isPaused = () => reduced.matches;
 const clamp = (value,low=0,high=1) => Math.max(low,Math.min(high,value));
 const smooth = (value,low,high) => {const t=clamp((value-low)/(high-low));return t*t*(3-2*t);};
 
@@ -17,10 +17,6 @@ function syncMotion() {
   const paused = isPaused();
   document.body.classList.toggle('motion-off', paused);
   document.body.classList.toggle('motion-enabled', !paused && motionStarted);
-  button.setAttribute('aria-pressed', String(paused));
-  button.disabled = reduced.matches;
-  button.innerHTML = reduced.matches ? 'Reduced motion <span>—</span>' : paused ? 'Motion off <span>▶</span>' : 'Motion on <span>Ⅱ</span>';
-  button.setAttribute('aria-label', reduced.matches ? 'Reduced motion follows your device setting' : paused ? 'Resume animation' : 'Pause animation');
   document.dispatchEvent(new CustomEvent('experience:motion', {detail:{paused}}));
 }
 function update() {
@@ -48,15 +44,20 @@ function update() {
     const travel=Math.max(1,ending.offsetHeight-innerHeight);
     const endingProgress=clamp(-ending.getBoundingClientRect().top/travel);
     const word=smooth(endingProgress,.82,.995);
+    ending.dataset.progress=endingProgress.toFixed(4);
     ending.style.setProperty('--ending-p',endingProgress.toFixed(4));
     ending.style.setProperty('--ending-scale',(0.5+endingProgress*12).toFixed(4));
     ending.style.setProperty('--ending-ring-scale',(0.35+endingProgress*3.2).toFixed(4));
     ending.style.setProperty('--ending-mark',(1-smooth(endingProgress,.72,.93)).toFixed(4));
     ending.style.setProperty('--ending-word',word.toFixed(4));
     ending.style.setProperty('--ending-ring',((1-word)*.7).toFixed(4));
+    ending.style.setProperty('--ending-bg',smooth(endingProgress,.58,.88).toFixed(4));
     ending.style.setProperty('--ending-y',((1-word)*18).toFixed(2)+'px');
+    ending.style.setProperty('--ending-line-a',((1-word)*120).toFixed(2)+'px');
+    ending.style.setProperty('--ending-line-b',((word-1)*120).toFixed(2)+'px');
     ending.style.setProperty('--ending-caption',(1-smooth(endingProgress,.54,.82)).toFixed(4));
     ending.dataset.phase=word>.98?'wordmark':endingProgress>.72?'expansion':'mark';
+    ending.dataset.active=String(ending.getBoundingClientRect().top<innerHeight*.18&&ending.getBoundingClientRect().bottom>0);
   }
   document.dispatchEvent(new CustomEvent('experience:scroll'));
 }
@@ -64,10 +65,10 @@ function scheduleUpdate() {if (!tickPending) {tickPending = true; requestAnimati
 window.addEventListener('scroll', scheduleUpdate, {passive:true});
 window.addEventListener('resize', scheduleUpdate, {passive:true});
 document.addEventListener('visibilitychange', () => document.documentElement.classList.toggle('motion-paused', document.hidden));
-button.addEventListener('click', () => {manuallyPaused = !manuallyPaused; syncMotion(); startEnhancements();});
 reduced.addEventListener('change', () => {syncMotion(); startEnhancements();});
 syncMotion();
 update();
+initSound();
 
 async function startEnhancements() {
   if (reduced.matches) return;

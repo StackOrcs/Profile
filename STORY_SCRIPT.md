@@ -5,7 +5,7 @@
 
 **Format:** A long, user-controlled scroll film. The visitor controls the pace. No forced autoplay, scroll interception, timer, mandatory loading screen, or sound. Progress is expressed through composition, material depth, typography and transitions. The actual websites are the evidence.
 
-**Visual arc:** A material brand portrait completes a turn → its layers open → the identity divides into six parts → connected disciplines stack into infrastructure → a decision network closes into protection → four real projects take the entire stage → paired couplings express partnership → the supplied black mark expands through a full-screen close → STACKORCS remains. Charcoal and warm paper provide contrast. Each transformation follows the business narrative; typography and real media remain central.
+**Visual arc:** A material brand portrait completes a turn → its layers open → the identity divides into six parts → connected disciplines stack into infrastructure → a decision network closes into protection → four real projects take the entire stage → paired couplings express partnership → the 3D identity centers and grows through a full-screen close → a moving PICK THE BEST / PICK STACKORCS lockup remains. Charcoal and warm paper provide contrast. Each transformation follows the business narrative; typography and real media remain central.
 
 **Brand:** The supplied black-background bear mark appears in the navigation, favicon, social preview and final closing. The original orange PNG remains the contour source for the physical 3D relief and fragments. The two treatments share the same outline without introducing an unrelated logo.
 
@@ -213,7 +213,7 @@
 
 **Full narrative:** Every project begins with context. The ambition. The constraints. The timing. The people who will use and operate the system. Bring those things to the conversation. StackOrcs will help find a clear next step. The journey does not end with this experience. It can continue with your product, your team, and the system you want to build.
 
-**Direction:** The linked forms lead into a final handoff. The 3D sculpture fades, the supplied black mark grows until its field covers the screen, and the last state resolves to STACKORCS in warm orange type. WhatsApp, the original site and social links stay direct and readable. At WhatsApp, the branded cursor becomes a heart: a small human response at a relevant action.
+**Direction:** The linked forms lead into a final handoff. The 3D sculpture centers, grows until it pushes beyond the viewport, and then gives way to a kinetic two-line lockup: “PICK THE BEST” over “PICK STACKORCS.” WhatsApp, the original site and social links stay direct and readable. At WhatsApp, the branded cursor becomes a heart: a small human response at a relevant action.
 
 **Primary action:** Talk on WhatsApp — +91 8303165648.
 

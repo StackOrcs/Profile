@@ -37,8 +37,7 @@ for(let chapter=4;chapter<8;chapter++)assert.notDeepEqual(nodePose(chapter-4,0),
 for(let position=8;position<11.94;position+=.1)assert.equal(directScene(position).opacity,0,'Real project screens must own the stage.');
 assert(directScene(3.5).division>.9,'Craft must physically separate the logo.');
 assert(directScene(12.5).partnership>.9,'Partnership needs its own sculpture.');
-assert(directScene(12.98).brand>.9,'The closing must resolve through the identity before the final handoff.');
-assert(directScene(13.6).opacity<.005,'The final handoff must release the 3D stage to the closing mark.');
+assert(directScene(13.5).brand>.9,'The closing must resolve back to the identity.');
 const group=new Group();group.add(subject);const hidden=new Mesh(new BoxGeometry(100,100,100),subject.material);hidden.visible=false;group.add(hidden);
 const camera=new PerspectiveCamera(scene.fov,1.6,.1,80);camera.position.z=scene.cameraZ;group.scale.setScalar(1);subject.scale.setScalar(1);subject.position.set(0,0,0);subject.rotation.set(0,0,0);
 createFramer(group,camera)(scene.desktopStage);assert(group.scale.x>.4,'An inactive sculpture must not shrink the visible sculpture.');
