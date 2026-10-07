@@ -4,7 +4,6 @@ import {motion} from './config.js';
 // Editorial transitions share the main GSAP context and revert with motion off.
 export function directEditorial(){
   gsap.fromTo('.studio-wordmark',{yPercent:0,opacity:.07},{yPercent:28,opacity:0,ease:'none',scrollTrigger:{trigger:'#opening',start:'top top',end:'bottom top',scrub:motion.scrub}});
-  gsap.from('.project-panel',{clipPath:'inset(0 0 100% 0)',duration:.5,ease:'power3.out',scrollTrigger:{trigger:'.project-panel',start:'top 96%',once:true}});
   document.querySelectorAll('.mission-chapter').forEach(section=>{
     gsap.fromTo(section.querySelector('.mission-copy'),{y:18},{y:-18,ease:'none',scrollTrigger:{trigger:section,start:'top bottom',end:'bottom top',scrub:motion.scrub}});
   });

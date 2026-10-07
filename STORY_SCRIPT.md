@@ -5,7 +5,7 @@
 
 **Format:** A long, user-controlled scroll film. The visitor controls the pace. No forced autoplay, scroll interception, timer, mandatory loading screen, or sound. Progress is expressed through composition, material depth, typography and transitions. The actual websites are the evidence.
 
-**Visual arc:** A material brand portrait → a typographic proposition → clear decisions → an exploded design stack → connected disciplines → a structural diagram → useful intelligence → trust → four real projects → human partnership → the next meaningful idea. Alternating charcoal and warm paper provide intentional contrast. Typography leads. Media provides the evidence. One continuous WebGL sculpture accompanies the chapters, receding to the margin while the real projects take the stage and returning for partnership and contact.
+**Visual arc:** A material brand portrait completes a turn → its layers open → the identity divides into six parts → connected disciplines stack into infrastructure → a decision network closes into protection → four real projects take the entire stage → paired couplings express partnership → the original identity returns. Charcoal and warm paper provide contrast. Each transformation follows the business narrative; typography and real media remain central.
 
 **Brand:** The supplied orange bear image stays unchanged in the navigation, favicon and social preview. A contour-derived 3D relief uses that same outline throughout one directed sequence. No alternative logo is introduced.
 
@@ -63,7 +63,7 @@
 
 **Full narrative:** The interface is where a person meets the system. It should make the next step understandable. It should work across screens, respect accessibility, and support the real workflow. But experience does not live alone. StackOrcs shapes experience, architecture, data, and operations together around a meaningful end-to-end path. Prototypes help teams see the choices. Design systems help those choices remain consistent. Purposeful motion makes the interaction clearer. The goal is craft with consequence: quality that improves trust and usability.
 
-**Direction:** A 250-viewport-percent chapter holds its copy while the brand relief begins facing the reader. Its identity, experience and engineering layers separate in depth, turn to a readable oblique angle and align again. Four caption beats follow surface, connected layers, engineering and the complete system. The front remains recognizable; the sequence does not park on an empty back plate. The physical metaphor is a connected system.
+**Direction:** A 250-viewport-percent chapter holds its copy after the identity completes its first rotation. Physical layers separate in depth and the original outline divides into six closed machined fragments. Four caption beats follow surface, layers, working parts and connection. Those six parts continue into the next section rather than resetting to the same logo.
 
 **Supporting copy:** Prototype. System design. Delivery plan.
 
@@ -77,7 +77,7 @@
 
 **Full narrative:** Working software asks the disciplines to cooperate. Product engineering turns the workflow into applications, platforms, APIs, and services. Experience systems make those products usable. Cloud foundations make delivery repeatable. AI contributes where it is useful. Security and operations help the system remain trustworthy. StackOrcs connects these disciplines around the outcome instead of treating them as separate hand-offs. Delivery happens in small, demonstrable increments, with automated quality, direct feedback, and operational visibility.
 
-**Direction:** Six large service rows replace cards. Type, numbers and separators form an ordered index. A focused hover response emphasizes one discipline. The section is easy to scan and each row links to the actual service page.
+**Direction:** Six service rows form an ordered index beside six connected machined surfaces, each carrying a fragment of the original identity. Pointer or keyboard focus on a discipline emphasizes its corresponding surface. Every row links to the actual service page.
 
 **Supporting copy:** Deep where it matters. Connected everywhere.
 
@@ -91,7 +91,7 @@
 
 **Full narrative:** Launch is one event. Delivery is an ongoing system. Reliable cloud foundations, infrastructure, pipelines, services, and integrations help a team keep improving without operational chaos. StackOrcs works across cloud architecture, platform engineering, CI/CD, and performance and cost tuning. The foundation should make change more manageable. It should support the team carrying the product forward. Progress depends on more than a first release; it depends on the next one being possible.
 
-**Direction:** A restrained architectural diagram connects structure, delivery and operations. Rules extend through a scroll-controlled mask. The diagram communicates continuity without claiming performance metrics.
+**Direction:** The six surfaces turn and stack into architectural tiers. Structure, delivery and operations remain readable in a restrained diagram. The same working parts now express an infrastructure foundation.
 
 **Supporting copy:** Architecture → delivery → operations.
 
@@ -105,7 +105,7 @@
 
 **Full narrative:** AI is useful when it helps a real process and can be evaluated. StackOrcs starts with the business workflow and trusted data. The work can include intelligent search, retrieval-augmented generation, workflow agents, evaluation, and guardrails. Human control and security are designed into the system. The question is not how much AI a product can display. The question is what it helps someone understand, find, decide, or complete—and how the team knows it is working.
 
-**Direction:** Useful. Measurable. Human. Three large words form the visual statement. A staggered mask reveal gives them hierarchy. Supporting copy explains trusted data, evaluation and human control.
+**Direction:** The tiers open into a radial decision network. Useful. Measurable. Human. Three large words explain the role of intelligence. The connected parts support the narrative of trusted data and human control.
 
 **Supporting copy:** Intelligent search. Workflow agents. Evaluation and guardrails.
 
@@ -119,7 +119,7 @@
 
 **Full narrative:** Trust belongs inside the product. Threat-aware architecture, identity and access, application security, and secure delivery practices help establish that trust. Messaging, monitoring, observability, SRE, incident readiness, and managed improvement help the team keep operating. StackOrcs treats security and ongoing operations as part of the delivery picture. The system should be understandable when it works and diagnosable when something needs attention. Good ownership continues beyond the launch.
 
-**Direction:** A quiet paper composition prioritizes trust. Security, visibility and sustainable ownership appear as three typographic proof lines. Movement is limited to entering the composition.
+**Direction:** The network folds into a six-sided protective enclosure. A quiet paper composition keeps security, visibility and sustainable ownership readable. The sculpture then exits, completing this sequence before the real work begins.
 
 **Links:** Security policy and Field Notes from the original website.
 
@@ -129,15 +129,15 @@
 
 **Purpose:** Ground the story in a real commerce system.
 
-**Screen:** “Built. Not imagined.” / “ModaStitch.”
+**Screen:** “Commerce. With character.” / “ModaStitch.”
 
 **Full narrative:** A storefront is an experience supported by a larger commerce system. ModaStitch connects product discovery, cart and checkout, inventory controls, and an administration workspace. The work spans the customer's journey and the team's ability to operate the store. The project makes the connection between visible experience and underlying engineering concrete. Here, the visitor can see the actual storefront rather than a made-up interface or a list of tools.
 
-**Direction:** Actual project media becomes the central image. The four persistent previews switch immediately. Oversized selected-work typography, captions and a small description replace the old browser-card treatment. The screen itself is the evidence.
+**Direction:** The actual storefront becomes the central image beside clear commerce context. Each of the four projects appears once in its own chapter. No switcher repeats the later chapters. The 3D scene is absent, giving the real screen the full composition; the custom cursor offers VIEW.
 
 **Evidence:** Actual project capture. Storefront and checkout. Inventory and administration. Customer analytics.
 
-**Visitor action:** Visit ModaStitch or switch to another project.
+**Visitor action:** Visit ModaStitch or continue to the next project.
 
 **Transition:** Commerce gives way to healthcare information.
 
@@ -197,7 +197,7 @@
 
 **Full narrative:** Technology changes quickly. Good partnership does not. Strong digital products come from close collaboration, candid decisions, and engineering that respects the business and the people using the system. StackOrcs is built around clarity over noise, craft with consequence, one connected system, and ownership that lasts. The people shaping the work stay close to it. Important tradeoffs are explained. Working evidence guides decisions. Documentation and clear architecture help the team carry the system forward.
 
-**Direction:** A large manifesto about engineering and partnership fills the viewport. Four principles become a full-width typographic index. Motion slows and the layout lets the words carry the section.
+**Direction:** Two machined couplings turn into a linked relationship beside the manifesto. This new sculpture expresses partnership rather than repeating the bear. Four principles remain the typographic substance of the section.
 
 **Supporting copy:** Clarity over noise. Craft with consequence. One connected system. Ownership that lasts.
 
@@ -213,7 +213,7 @@
 
 **Full narrative:** Every project begins with context. The ambition. The constraints. The timing. The people who will use and operate the system. Bring those things to the conversation. StackOrcs will help find a clear next step. The journey does not end with this experience. It can continue with your product, your team, and the system you want to build.
 
-**Direction:** The final statement is Make the next thing matter. Warm orange typography replaces a scene effect. WhatsApp, the original site and social links remain direct and readable. The outcome is a clear invitation to start a useful conversation.
+**Direction:** The linked forms resolve back to the original bear. Make the next thing matter closes the story in warm orange type. WhatsApp, the original site and social links stay direct and readable. At WhatsApp, the branded cursor becomes a heart: a small human response at a relevant action.
 
 **Primary action:** Talk on WhatsApp — +91 8303165648.
 
@@ -226,12 +226,12 @@
 ## Production rules
 
 1. **Keep the visitor in control.** Native scrolling determines the story. Chapter navigation, skip-to-work, and contact remain available. There are fourteen substantive chapters, not fourteen empty screens.
-2. **Keep the business visible.** Each visual follows the narrative: orientation, connected design, flight systems, foundations, useful intelligence, protection, actual work, partnership, next step.
+2. **Keep the business visible.** Each visual follows the narrative: orientation, connected design, disciplines, foundations, useful intelligence, protection, actual work, partnership, next step.
 3. **Keep the evidence honest.** Use the real project captures and the original main-site content. No invented customers, growth percentages, launch counts, quotes, certifications, service-level guarantees, or revenue claims.
 
 
-6. **Keep switching fast.** Preload the four project images, decode them once, keep them mounted, and reveal the selected image immediately. A pending image never displays the previous project's media.
-7. **Keep the GPU budget controlled.** Simple original geometry, bounded star counts, capped resolution, limited lighting, no bloom/DOF compositor, and a lower mobile frame rate. Pause rendering when hidden or motion is disabled.
+6. **Keep media immediate.** Preload four unique project images. Each screen is mounted once and remains readable without JavaScript. There is no duplicate switcher or delayed media replacement.
+7. **Keep the GPU budget controlled.** Original geometry, capped resolution, shared materials, limited lighting and no bloom/DOF compositor. Aim for 60 fps while changing, and stop rendering when settled, inside the project interval, hidden or paused. Touch and reduced motion use native input.
 8. **Keep accessibility intact.** Reduced motion produces a complete readable story. Keyboard navigation works. Graphics are decorative. External routes are actual links.
 9. **Keep shipping independent.** Commit generated static bundles with the source so the existing static Vercel project can serve the revamp. Push to GitHub; do not change the user's Vercel settings.
 

@@ -18,9 +18,16 @@ export function samplePose(poses,position){
 // Project the whole assembly, including separated rear layers, into a safe stage.
 // The reusable bounds/vectors keep this fitting pass allocation-free.
 export function createFramer(subject,camera){
-  const box=new Box3(),corner=new Vector3();
+  const box=new Box3(),part=new Box3(),corner=new Vector3();
   const measure=()=>{
-    subject.updateMatrixWorld(true);box.setFromObject(subject);
+    subject.updateMatrixWorld(true);box.makeEmpty();
+    // Hidden actors must not make the current sculpture shrink into the gutter.
+    subject.traverseVisible(object=>{
+      if(!object.geometry)return;
+      if(object.isInstancedMesh){if(!object.boundingBox)object.computeBoundingBox();part.copy(object.boundingBox);}
+      else{if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();part.copy(object.geometry.boundingBox);}
+      box.union(part.applyMatrix4(object.matrixWorld));
+    });
     let left=Infinity,right=-Infinity,top=-Infinity,bottom=Infinity;
     for(let i=0;i<8;i++){
       corner.set(i&1?box.max.x:box.min.x,i&2?box.max.y:box.min.y,i&4?box.max.z:box.min.z).project(camera);
