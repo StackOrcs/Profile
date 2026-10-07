@@ -49,7 +49,7 @@
 
 **Full narrative:** Useful progress begins with useful questions. What business outcome should change? What is the user's real situation? Which constraints are fixed? Which risks need attention now? Which decisions cannot be postponed? StackOrcs aligns these questions before turning them into a delivery plan. The result is a shared brief, an opportunity map, and a first delivery slice that can produce evidence. A clear starting point saves the team from building an impressive answer to the wrong problem.
 
-**Direction:** Warm paper replaces charcoal. Three editorial columns describe the outcome, people and constraints. Dividing rules draw in. The shift in palette and composition signals a clearer decision-making space. The sculpture turns gently in its reserved space.
+**Direction:** A warm paper composition holds for a seven-second scroll-controlled score across 5.2 viewport heights. A metallic interference field gathers into 48 contour-derived bear ribbons. Silver becomes orange; the eyes wake, the lower ribbons articulate a silent growl, and three physical wavefronts leave the face before the identity settles. Typography shifts emphasis from noise to signal. The outcome, people and constraints appear in sequence, giving the visual performance a business purpose. Native scrolling plays and reverses the score; reduced motion keeps all three questions readable without a long hold. This sequence belongs only to chapter 03.
 
 **Supporting copy:** Shared brief → opportunity map → first delivery slice.
 

@@ -1,3 +1,5 @@
+import {signalConfig} from './signal-config.js';
+import {sampleSignal} from './signal-state.js';
 const smooth=(value,low,high)=>{const t=Math.max(0,Math.min(1,(value-low)/(high-low)));return t*t*(3-2*t);};
 
 export function sampleStage(stages,position){
@@ -12,8 +14,16 @@ export function createStage(settings){
   const slots=[...document.querySelectorAll('[data-scene-slot]')];
   const craft=document.querySelector('#craft');
   const craftCopy=craft.querySelector('.chapter-copy');
+  const signal=document.querySelector('#clarity'),signalCopy=signal.querySelector('.signal-copy');
   return(compact,position,height)=>{
-    if(!compact)return {bounds:sampleStage(settings.stages,position),opacity:1};
+    if(!compact){
+      const bounds=sampleStage(settings.stages,position),weight=sampleSignal(position,signal.offsetHeight,height).weight;
+      return {bounds:bounds.map((value,index)=>value+(signalConfig.desktopStage[index]-value)*weight),opacity:1};
+    }
+    if(position>=2&&position<3){
+      const rect=signal.getBoundingClientRect(),top=Math.max(.40,(signalCopy.getBoundingClientRect().bottom+18)/height),bottom=Math.min(.94,(rect.bottom-24)/height);
+      if(bottom>top+.10)return {bounds:[.08,top,.92,bottom],opacity:smooth(bottom-top,.10,.25)};
+    }
     if(position>=3&&position<4){
       const rect=craft.getBoundingClientRect();
       const top=Math.max(settings.mobileStage[1],(craftCopy.getBoundingClientRect().bottom+22)/height);

@@ -5,6 +5,7 @@ import {directScene} from './director.js';
 import {scene as settings} from './config.js';
 import {createFramer,samplePose} from './framing.js';
 import {createStage} from './stage.js';
+import {sampleSignal} from './signal-state.js';
 
 // A physical brand sculpture. All front outlines are traced from the user's PNG.
 export async function initScene({story,isPaused}) {
@@ -54,6 +55,20 @@ export async function initScene({story,isPaused}) {
   const sculpture=new THREE.Group();scene.add(sculpture);
   const identity=createBrand(materials),systems=createSystems(materials),partnership=createPartnership(materials);
   sculpture.add(identity.group,systems.group,partnership.group);
+  const signalSection=document.querySelector('#clarity');let signal=null,signalPending=false,closed=false;
+  const warmSignal=()=>{
+    if(signalPending)return;signalPending=true;
+    import('./signal-scene.js').then(({createSignal})=>{
+      if(closed)return;
+      const candidate=createSignal(materials);
+      const prewarm=renderer.compileAsync?.(candidate.group,camera,scene);
+      return Promise.resolve(prewarm).catch(()=>{}).then(()=>{
+        if(closed)return;
+        signal=candidate;sculpture.add(signal.group);signalSection.dataset.signalScene='ready';previousState='';start();
+      });
+    }).catch(()=>{signalSection.dataset.signalScene='fallback';});
+  };
+  const signalObserver=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){warmSignal();signalObserver.disconnect();}},{rootMargin:'75% 0px'});signalObserver.observe(signalSection);
 
   // A readable front → inner layers → front sequence continues through the story.
   const shots=settings.shots,fit=createFramer(sculpture,camera),getStage=createStage(settings),craft=document.querySelector('#craft');
@@ -69,6 +84,7 @@ export async function initScene({story,isPaused}) {
     renderedStory=force?target:THREE.MathUtils.damp(renderedStory,target,settings.scrollDamping,delta);
     if(Math.abs(renderedStory-target)<.00005)renderedStory=target;
     const s=renderedStory,direction=directScene(s),index=Math.min(13,Math.floor(s)),pose=samplePose(shots,s);
+    if(s>=1.85&&s<3&&!signal)warmSignal();
     pointer.x=THREE.MathUtils.damp(pointer.x,targetX,14,delta);pointer.y=THREE.MathUtils.damp(pointer.y,targetY,14,delta);
     if(Math.abs(pointer.x-targetX)<.00005)pointer.x=targetX;
     if(Math.abs(pointer.y-targetY)<.00005)pointer.y=targetY;
@@ -86,7 +102,11 @@ export async function initScene({story,isPaused}) {
     sculpture.rotation.set(pose[0]+pointer.y,pose[1]+pointer.x,pose[2]);
     sculpture.scale.setScalar(pose[3]*(compact.matches?settings.mobileScale:settings.desktopScale));
     const gap=Math.max(0,pose[4])*settings.layerSeparation/1.4;
-    identity.group.visible=direction.brand>.015;identity.group.scale.setScalar(direction.brand);
+    const signalState=signal?sampleSignal(s,signalSection.offsetHeight,host.clientHeight):{progress:0,weight:0};
+    const identityWeight=direction.brand*(1-signalState.weight);
+    identity.group.visible=identityWeight>.015;identity.group.scale.setScalar(identityWeight);
+    if(signal){signal.group.visible=signalState.weight>.015;if(signal.group.visible)signal.update(signalState.progress,signalState.weight,pose);}
+    host.dataset.signal=signalState.progress.toFixed(3);
     systems.group.visible=direction.systems>.015;partnership.group.visible=direction.partnership>.015;
     identity.update(gap,direction.division);systems.update(direction.form,direction.systems,focus);partnership.update(Math.max(0,Math.min(1,s-12)),direction.partnership);
     camera.fov=settings.fov;camera.updateProjectionMatrix();
@@ -123,5 +143,5 @@ export async function initScene({story,isPaused}) {
   renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();lost=true;stop();document.body.classList.remove('scene-ready');document.body.classList.add('scene-failed');host.dataset.scene='fallback';});
   resize();host.dataset.scene='brand-sculpture';host.dataset.quality='balanced';host.dataset.triangles=String(renderer.info.render.triangles);
   document.body.classList.add('scene-ready');start();
-  return ()=>{focusCleanup.forEach(clean=>clean());stop();observer.disconnect();sizeObserver.disconnect();window.removeEventListener('resize',resize);document.removeEventListener('experience:scroll',start);window.removeEventListener('pointermove',onPointer);document.removeEventListener('experience:direction',direction);document.removeEventListener('pointerleave',resetPointer);document.removeEventListener('visibilitychange',sync);document.removeEventListener('experience:motion',sync);scene.traverse(o=>{o.geometry?.dispose();if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose());});environment.dispose();renderer.dispose();renderer.domElement.remove();};
+  return ()=>{closed=true;signalObserver.disconnect();focusCleanup.forEach(clean=>clean());stop();observer.disconnect();sizeObserver.disconnect();window.removeEventListener('resize',resize);document.removeEventListener('experience:scroll',start);window.removeEventListener('pointermove',onPointer);document.removeEventListener('experience:direction',direction);document.removeEventListener('pointerleave',resetPointer);document.removeEventListener('visibilitychange',sync);document.removeEventListener('experience:motion',sync);scene.traverse(o=>{o.geometry?.dispose();if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose());});environment.dispose();renderer.dispose();renderer.domElement.remove();};
 }

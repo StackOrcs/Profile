@@ -5,6 +5,7 @@ import {splitWords} from './text.js';
 import {initMedia} from './media.js';
 import {directEditorial} from './editorial.js';
 import {initCursor} from './cursor.js';
+import {directSignal} from './signal.js';
 
 export function initMotion(isPaused){
   gsap.registerPlugin(ScrollTrigger);ScrollTrigger.config({ignoreMobileResize:true});
@@ -17,6 +18,7 @@ export function initMotion(isPaused){
     if(isPaused())return;
     context=gsap.context(()=>{
       directEditorial();
+      directSignal();
       gsap.from('.title-line .word',{yPercent:105,rotation:.5,stagger:.035,duration:motion.revealDuration,ease:motion.revealEase});
       gsap.from('.hero-copy .kicker,.hero-copy .lede,.hero-actions',{y:12,opacity:0,stagger:.06,duration:.45,delay:.08,ease:'power3.out'});
       document.querySelectorAll('.reveal-heading').forEach(heading=>{
@@ -27,7 +29,6 @@ export function initMotion(isPaused){
         gsap.from(element,{y:14,opacity:0,duration:.42,ease:'power3.out',scrollTrigger:{trigger:element,start:'top 95%',once:true}});
       });
       gsap.fromTo('#launch-title .word',{color:'#484f42'},{color:'#ecebe5',stagger:.2,ease:'none',scrollTrigger:{trigger:'#launch-title',start:'top 72%',end:'bottom 36%',scrub:motion.scrub}});
-      gsap.from('.decision-list li',{y:18,opacity:0,stagger:.075,duration:.55,ease:'power3.out',scrollTrigger:{trigger:'.decision-list',start:'top 90%',once:true}});
       gsap.from('.foundation-diagram',{clipPath:'inset(0 100% 0 0)',duration:.65,ease:'power3.inOut',scrollTrigger:{trigger:'.foundation-diagram',start:'top 90%',once:true}});
       gsap.from('.intelligence-statement span',{y:32,opacity:0,stagger:.08,duration:.62,ease:'power3.out',scrollTrigger:{trigger:'.intelligence-statement',start:'top 90%',once:true}});
       document.querySelectorAll('.mission-screen').forEach(screen=>{
