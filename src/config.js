@@ -3,11 +3,15 @@ export const motion = {
   revealDuration:.62, revealStagger:.025, revealEase:'power3.out',
   scrub:.22, mediaTilt:4, mediaParallax:30, pointerAmount:.15
 };
+export const ending = {
+  approachViewport:.75,moveUntil:.28,zoomStart:.12,zoomEnd:.82,
+  desktopZoom:9,mobileZoom:4.8
+};
 export const scene = {
   fov:36, cameraZ:8.7, mobileCameraZ:8.5, desktopPixelRatio:1.75,
   mobilePixelRatio:1.25, desktopFps:60, mobileFps:60, exposure:1.12,
   desktopScale:1, mobileScale:.68, pointerDepth:.12, scrollDamping:24,
-  layerSeparation:1.4,endingZoom:9,
+  layerSeparation:1.4,
   desktopStage:[.54,.16,.94,.85], mobileStage:[.08,.58,.92,.92],
   // Chapter position → X/Y/Z rotation, scale, layer separation (radians).
   // One full identity turn; craft opens it into six parts. Subsequent actors

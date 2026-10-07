@@ -1,4 +1,6 @@
 import {initSound} from './sound.js';
+import {initCursor} from './cursor.js';
+import {ending as endingSettings} from './config.js';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const chapters = [...document.querySelectorAll('.story-act')];
@@ -38,9 +40,12 @@ function update() {
   document.getElementById('scene-host').dataset.progress = progress.toFixed(3);
   if (ending) {
     const travel=Math.max(1,ending.offsetHeight-innerHeight);
-    const endingProgress=clamp(-ending.getBoundingClientRect().top/travel);
+    const endingRect=ending.getBoundingClientRect();
+    const endingProgress=clamp(-endingRect.top/travel);
+    const approach=clamp((innerHeight*endingSettings.approachViewport-endingRect.top)/(innerHeight*endingSettings.approachViewport+travel*endingSettings.moveUntil));
     const word=smooth(endingProgress,.82,.995);
     ending.dataset.progress=endingProgress.toFixed(4);
+    ending.dataset.approach=approach.toFixed(4);
     ending.style.setProperty('--ending-p',endingProgress.toFixed(4));
     ending.style.setProperty('--ending-scale',(0.5+endingProgress*12).toFixed(4));
     ending.style.setProperty('--ending-ring-scale',(0.35+endingProgress*3.2).toFixed(4));
@@ -67,6 +72,7 @@ reduced.addEventListener('change', () => {syncMotion(); startEnhancements();});
 syncMotion();
 update();
 initSound();
+initCursor();
 
 // A brief fabric reveal gives the experience a deliberate opening beat.
 if (reduced.matches) {

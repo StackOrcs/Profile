@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {createBrand} from './brand.js';
 import {createSystems,createPartnership} from './forms.js';
 import {directScene} from './director.js';
-import {scene as settings} from './config.js';
+import {scene as settings,ending as endingSettings} from './config.js';
 import {createFramer,samplePose} from './framing.js';
 import {createStage} from './stage.js';
 import {sampleSignal} from './signal-state.js';
@@ -74,7 +74,7 @@ export async function initScene({story,isPaused}) {
 
   // A readable front → inner layers → front sequence continues through the story.
   const shots=settings.shots,fit=createFramer(sculpture,camera),getStage=createStage(settings),craft=document.querySelector('#craft');
-  let renderedStory=story(),focus=-1;
+  let renderedStory=story(),renderedEnding=0,renderedApproach=0,focus=-1;
   const focusCleanup=[...document.querySelectorAll('.system-node')].map((node,index)=>{const enter=()=>{focus=index;start();};const leave=()=>{focus=-1;start();};node.addEventListener('pointerenter',enter);node.addEventListener('pointerleave',leave);node.addEventListener('focus',enter);node.addEventListener('blur',leave);return()=>{node.removeEventListener('pointerenter',enter);node.removeEventListener('pointerleave',leave);node.removeEventListener('focus',enter);node.removeEventListener('blur',leave);};});
   const pointer={x:0,y:0};let targetX=0,targetY=0;
   const onPointer=e=>{if(!compact.matches){targetX=(e.clientX/innerWidth-.5)*settings.pointerDepth;targetY=(e.clientY/innerHeight-.5)*settings.pointerDepth*.67;start();}};
@@ -90,13 +90,17 @@ export async function initScene({story,isPaused}) {
     pointer.x=THREE.MathUtils.damp(pointer.x,targetX,14,delta);pointer.y=THREE.MathUtils.damp(pointer.y,targetY,14,delta);
     if(Math.abs(pointer.x-targetX)<.00005)pointer.x=targetX;
     if(Math.abs(pointer.y-targetY)<.00005)pointer.y=targetY;
-    const endingActive=endingSection?.dataset.active==='true';
-    const endingProgress=endingSection?Math.max(0,Math.min(1,Number(endingSection.dataset.progress||0))):0;
-    // Phones need a visible finale slot. Desktop retains the existing frame.
-    const stage=endingActive&&compact.matches
-      ? {bounds:[.13,.14,.87,.86],opacity:1}
-      : getStage(compact.matches,compact.matches?target:s,host.clientHeight);
-    const state=[s,pointer.x,pointer.y,settings.fov,settings.exposure,settings.desktopScale,settings.mobileScale,settings.layerSeparation,...stage.bounds,stage.opacity,focus,endingActive?1:0,endingProgress].map(n=>n.toFixed(5)).join('/');
+    const endingTarget=Number(endingSection?.dataset.progress||0),approachTarget=Number(endingSection?.dataset.approach||0);
+    renderedEnding=force?endingTarget:THREE.MathUtils.damp(renderedEnding,endingTarget,settings.scrollDamping,delta);
+    renderedApproach=force?approachTarget:THREE.MathUtils.damp(renderedApproach,approachTarget,settings.scrollDamping,delta);
+    if(Math.abs(renderedEnding-endingTarget)<.00005)renderedEnding=endingTarget;
+    if(Math.abs(renderedApproach-approachTarget)<.00005)renderedApproach=approachTarget;
+    const endingProgress=renderedEnding,shift=THREE.MathUtils.smootherstep(renderedApproach,0,1);
+    const stage=getStage(compact.matches,compact.matches?target:s,host.clientHeight);
+    // Translate the existing frame continuously, preserving its dimensions.
+    const dx=(.5-(stage.bounds[0]+stage.bounds[2])/2)*shift,dy=(.5-(stage.bounds[1]+stage.bounds[3])/2)*shift;
+    stage.bounds=stage.bounds.map((value,index)=>value+(index%2?dy:dx));
+    const state=[s,pointer.x,pointer.y,settings.fov,settings.exposure,settings.desktopScale,settings.mobileScale,settings.layerSeparation,...stage.bounds,stage.opacity,focus,endingProgress].map(n=>n.toFixed(5)).join('/');
     if(state===previousState)return false;
     previousState=state;
     const opacity=stage.opacity*direction.opacity;
@@ -118,18 +122,14 @@ export async function initScene({story,isPaused}) {
     identity.update(gap,direction.division);systems.update(direction.form,direction.systems,focus);partnership.update(Math.max(0,Math.min(1,s-12)),direction.partnership);
     camera.fov=settings.fov;camera.clearViewOffset();camera.updateProjectionMatrix();
     const bounds=fit(stage.bounds);
-    if(endingActive) {
-      if(compact.matches) sculpture.scale.multiplyScalar(THREE.MathUtils.lerp(1,4.8,endingProgress));
-      else {
-        // Optical enlargement preserves the sculpture's proportions and depth.
-        // Anchor the camera crop to its current screen position, with no recenter.
-        const zoom=THREE.MathUtils.lerp(1,settings.endingZoom,THREE.MathUtils.smootherstep(endingProgress,0,1));
-        const width=host.clientWidth,height=host.clientHeight;
-        const anchorX=(bounds[0]+bounds[2])/2,anchorY=(bounds[1]+bounds[3])/2;
-        camera.setViewOffset(width,height,anchorX*width*(1-1/zoom),anchorY*height*(1-1/zoom),width/zoom,height/zoom);
-        host.dataset.endingZoom=zoom.toFixed(4);
-      }
+    // Optical enlargement avoids changing the object's depth or clipping it.
+    const zoom=THREE.MathUtils.lerp(1,compact.matches?endingSettings.mobileZoom:endingSettings.desktopZoom,THREE.MathUtils.smootherstep(endingProgress,endingSettings.zoomStart,endingSettings.zoomEnd));
+    if(zoom>1){
+      const width=host.clientWidth,height=host.clientHeight;
+      const anchorX=(bounds[0]+bounds[2])/2,anchorY=(bounds[1]+bounds[3])/2;
+      camera.setViewOffset(width,height,anchorX*width*(1-1/zoom),anchorY*height*(1-1/zoom),width/zoom,height/zoom);
     }
+    host.dataset.endingZoom=zoom.toFixed(4);host.dataset.endingShift=shift.toFixed(4);
     host.dataset.bounds=bounds.map(n=>n.toFixed(4)).join(',');
     host.dataset.stage=stage.bounds.join(',');
     host.dataset.explosion=gap.toFixed(2);host.dataset.rotation=pose[1].toFixed(3);

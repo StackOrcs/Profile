@@ -15,6 +15,7 @@ export function createStage(settings){
   const craft=document.querySelector('#craft');
   const craftCopy=craft.querySelector('.chapter-copy');
   const signal=document.querySelector('#clarity'),signalCopy=signal.querySelector('.signal-copy');
+  const contactSlot=document.querySelector('#contact [data-scene-slot]');
   return(compact,position,height)=>{
     if(!compact){
       const bounds=sampleStage(settings.stages,position),weight=sampleSignal(position,signal.offsetHeight,height).weight;
@@ -29,6 +30,15 @@ export function createStage(settings){
       const top=Math.max(settings.mobileStage[1],(craftCopy.getBoundingClientRect().bottom+22)/height);
       const bottom=Math.min(.94,(rect.bottom-30)/height);
       if(bottom>top+.10)return {bounds:[.08,top,.92,bottom],opacity:smooth(bottom-top,.10,.25)};
+    }
+    if(position>=13&&contactSlot){
+      // Hold the actual contact sculpture as its slot scrolls out of view.
+      // The finale can then move that same frame instead of restoring it anew.
+      const rect=contactSlot.getBoundingClientRect();
+      const settle=smooth(position,13,13.20);
+      const top=Math.max(.09,Math.min(.90,(rect.top+12)/height));
+      const bottom=Math.max(top+.12,Math.min(.94,(rect.bottom-12)/height));
+      return {bounds:[.08,top+(settings.mobileStage[1]-top)*settle,.92,bottom+(settings.mobileStage[3]-bottom)*settle],opacity:1};
     }
     let best=null,visibility=0;
     for(const slot of slots){
