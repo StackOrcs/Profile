@@ -12,7 +12,7 @@ export async function initScene({story,isPaused}) {
   const compact = matchMedia('(max-width:760px)');
   let renderer;
   try {renderer = new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'high-performance',stencil:false});}
-  catch {host.dataset.scene='fallback';return;}
+  catch {host.dataset.scene='fallback';document.body.classList.add('scene-failed');return;}
   renderer.setPixelRatio(Math.min(devicePixelRatio,compact.matches?settings.mobilePixelRatio:settings.desktopPixelRatio));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -96,9 +96,8 @@ export async function initScene({story,isPaused}) {
   [[-1.55,-1.6],[1.55,-1.6],[-1.55,1.6],[1.55,1.6]].forEach(([x,y],i)=>{dummy.position.set(x,y,.095);dummy.rotation.set(Math.PI/2,0,0);dummy.updateMatrix();fasteners.setMatrixAt(i,dummy.matrix);});chassis.add(fasteners);
   const base=new THREE.Mesh(frameGeometry,copper);base.position.z=-1;sculpture.add(base);
 
-  // Shot direction: front portrait → bevel macro → side profile → exploded stack
-  // → reverse-side detail → reassembly. The subject stays on one anchor.
-  const shots=settings.shots,fit=createFramer(sculpture,camera),getStage=createStage(settings);
+  // A readable front → inner layers → front sequence continues through the story.
+  const shots=settings.shots,fit=createFramer(sculpture,camera),getStage=createStage(settings),craft=document.querySelector('#craft');
   let renderedStory=story();
   const pointer={x:0,y:0};let targetX=0,targetY=0;
   const onPointer=e=>{if(!compact.matches){targetX=(e.clientX/innerWidth-.5)*settings.pointerDepth;targetY=(e.clientY/innerHeight-.5)*settings.pointerDepth*.67;start();}};
@@ -106,20 +105,24 @@ export async function initScene({story,isPaused}) {
   window.addEventListener('pointermove',onPointer,{passive:true});document.addEventListener('pointerleave',resetPointer);
   let frame=0,lastFrame=0,visible=true,lost=false,slow=0,draws=0,previousState='';
   const draw=(delta=1/60,force=false)=>{
-    const target=Math.min(13,Math.max(0,story()));
+    const target=Math.min(14,Math.max(0,story()));
     renderedStory=force?target:THREE.MathUtils.damp(renderedStory,target,settings.scrollDamping,delta);
     if(Math.abs(renderedStory-target)<.00005)renderedStory=target;
-    const s=renderedStory,index=Math.min(12,Math.floor(s)),pose=samplePose(shots,s);
+    const s=renderedStory,index=Math.min(13,Math.floor(s)),pose=samplePose(shots,s);
     pointer.x=THREE.MathUtils.damp(pointer.x,targetX,14,delta);pointer.y=THREE.MathUtils.damp(pointer.y,targetY,14,delta);
     if(Math.abs(pointer.x-targetX)<.00005)pointer.x=targetX;
     if(Math.abs(pointer.y-targetY)<.00005)pointer.y=targetY;
-    const stage=getStage(compact.matches,target,host.clientHeight);
+    const stage=getStage(compact.matches,compact.matches?target:s,host.clientHeight);
     const state=[s,pointer.x,pointer.y,settings.fov,settings.exposure,settings.desktopScale,settings.mobileScale,settings.layerSeparation,...stage.bounds,stage.opacity].map(n=>n.toFixed(5)).join('/');
     if(state===previousState)return false;
     previousState=state;
-    const opacity=(1-THREE.MathUtils.smoothstep(s,settings.fadeStart,settings.visibleUntil))*stage.opacity;
+    const opacity=stage.opacity;
     host.style.opacity=String(opacity);host.style.setProperty('--scene-opacity',String(opacity));host.dataset.shot=String(index+1);
-    if(opacity<.005){host.dataset.running='false';return false;}
+    host.dataset.story=s.toFixed(3);
+    craft.dataset.phase=String(s<3.2?0:s<3.6?1:s<3.82?2:3);
+    // An invisible phone gap still needs to finish following the scroll target.
+    // Stopping here too early can strand the scene before its next visible slot.
+    if(opacity<.005){const following=Math.abs(s-target)>.00005;host.dataset.running=String(following);return following;}
     sculpture.rotation.set(pose[0]+pointer.y,pose[1]+pointer.x,pose[2]);
     sculpture.scale.setScalar(pose[3]*(compact.matches?settings.mobileScale:settings.desktopScale));
     const gap=Math.max(0,pose[4])*settings.layerSeparation/1.4;
@@ -142,7 +145,7 @@ export async function initScene({story,isPaused}) {
       const delta=Math.min(.05,(now-lastFrame)/1000);lastFrame=now;const before=performance.now();const rendered=draw(delta);const cost=performance.now()-before;
       if(!rendered){host.dataset.running='false';return;}
       slow=cost>24?slow+1:Math.max(0,slow-1);
-      if(slow>15&&renderer.getPixelRatio()>1){renderer.setPixelRatio(1);renderer.setSize(innerWidth,innerHeight,false);host.dataset.quality='adaptive';slow=0;}
+      if(slow>15&&renderer.getPixelRatio()>1){renderer.setPixelRatio(1);renderer.setSize(host.clientWidth,host.clientHeight,false);host.dataset.quality='adaptive';slow=0;}
       if(draws%60===0)host.dataset.renderMs=cost.toFixed(1);
     }
     frame=requestAnimationFrame(tick);
@@ -156,7 +159,7 @@ export async function initScene({story,isPaused}) {
   window.addEventListener('resize',resize,{passive:true});document.addEventListener('visibilitychange',sync);document.addEventListener('experience:motion',sync);
   const sizeObserver=new ResizeObserver(resize);sizeObserver.observe(host);
   const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();});observer.observe(document.querySelector('main'));
-  renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();lost=true;stop();document.body.classList.remove('scene-ready');host.dataset.scene='fallback';});
+  renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();lost=true;stop();document.body.classList.remove('scene-ready');document.body.classList.add('scene-failed');host.dataset.scene='fallback';});
   resize();host.dataset.scene='brand-sculpture';host.dataset.quality='balanced';host.dataset.triangles=String(renderer.info.render.triangles);
   document.body.classList.add('scene-ready');start();
   return ()=>{stop();observer.disconnect();sizeObserver.disconnect();window.removeEventListener('resize',resize);document.removeEventListener('experience:scroll',start);window.removeEventListener('pointermove',onPointer);document.removeEventListener('experience:direction',direction);document.removeEventListener('pointerleave',resetPointer);document.removeEventListener('visibilitychange',sync);document.removeEventListener('experience:motion',sync);scene.traverse(o=>{o.geometry?.dispose();if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose());});environment.dispose();renderer.dispose();renderer.domElement.remove();};

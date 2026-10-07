@@ -36,3 +36,23 @@ html{scroll-padding-top:0}
 .mobile-scene-slot{display:none}
 @media(max-width:760px){.mobile-scene-slot{display:block;flex:none;height:38svh;margin:26px 0 0}.opening .mobile-scene-slot{height:36svh;margin-top:18px}.launch,.signal-chapter{padding-bottom:100px}.launch-track{margin-top:35px}.decision-list{margin-top:35px}}
 .project-image[data-project=rivixa]{object-fit:contain}.preview-stage[data-theme=rivixa] .project-media{background:#edf4f1}.mission-rivixa .mission-screen>img{aspect-ratio:1265/712;object-fit:contain}.motion-off #scene-host{visibility:hidden}
+/* A correctly sized fallback is only shown when optional 3D cannot run. */
+.brand-fallback{opacity:0;transform:none}.brand-fallback img{width:100%;height:auto;aspect-ratio:1;object-fit:contain}.scene-failed .brand-fallback,.motion-off:not(.scene-ready) .brand-fallback{opacity:.65}
+/* Give the inner-layer reveal enough scroll room to read as a sequence. */
+.craft-chapter{min-height:250svh;padding-top:19vh}.craft-chapter .chapter-copy{top:19vh}.craft-chapter .material-caption{position:static;margin-top:24px;gap:9px;font-size:7px}.material-caption span{opacity:.35;transition:opacity .18s,color .18s}.craft-chapter[data-phase="0"] .material-caption span:nth-child(1),.craft-chapter[data-phase="1"] .material-caption span:nth-child(2),.craft-chapter[data-phase="2"] .material-caption span:nth-child(3),.craft-chapter[data-phase="3"] .material-caption span:nth-child(4){opacity:1;color:var(--orange)}
+@media(min-width:761px){
+  .launch-track,.decision-list{width:52%}.launch-track{grid-template-columns:repeat(2,1fr)}.decision-list{grid-template-columns:1fr;gap:20px;margin-top:50px}.decision-list li{display:grid;grid-template-columns:28px 1fr;gap:8px 15px;padding-top:18px}.decision-list span{grid-row:span 2;margin:5px 0 0}.decision-list strong{font-size:27px;letter-spacing:-1px}.decision-list p{grid-column:2;margin:0;font-size:12px}
+  .systems .section-heading,.systems .system-grid,.cloud-chapter .chapter-copy,.cloud-chapter .foundation-diagram,.ai-chapter .chapter-copy,.ai-chapter .intelligence-statement,.protection-chapter .chapter-copy,.protection-chapter .trust-proof,.partnership .chapter-copy,.partnership .values-strip{width:62%;max-width:62%}
+  .systems .section-heading h2,.ai-chapter h2{font-size:clamp(44px,5.2vw,84px)}
+  .system-node>div{display:block}.system-node h3{font-size:clamp(24px,2.5vw,40px);margin-bottom:8px}.system-node p{max-width:450px}.system-node{padding:23px 0}
+  .cloud-chapter h2,.protection-chapter h2{font-size:clamp(48px,5.8vw,92px)}.foundation-diagram{grid-template-columns:1fr 18px 1fr 18px 1fr;gap:12px}.foundation-diagram strong{font-size:clamp(20px,1.8vw,29px);letter-spacing:-.8px}.foundation-diagram i{font-size:22px}
+  .intelligence-statement{font-size:clamp(54px,6.2vw,100px)}.intelligence-statement span{min-width:100%}
+  .trust-proof{flex-direction:column;gap:0;padding:0}.trust-proof span{padding:22px 0;border-bottom:1px solid #181a1725}
+  .partnership h2{font-size:clamp(46px,5.3vw,85px)}.partnership .story-copy{margin-left:0}.values-strip span{font-size:clamp(27px,3.1vw,50px)}
+  .contact>.kicker,.contact>h2,.contact>.story-copy,.contact>.contact-actions,.contact>.social-links{align-self:flex-start;text-align:left;width:62%;max-width:62%;justify-content:flex-start}.contact h2{font-size:clamp(58px,7.1vw,114px)}
+}
+@media(max-width:760px){
+  .craft-chapter{min-height:250svh;padding-top:12vh}.craft-chapter .chapter-copy{top:12vh}.mobile-scene-slot{height:34svh;margin-bottom:18px}.systems .mobile-scene-slot{margin-top:0}.mission-chapter>.mobile-scene-slot{order:1;width:100%;height:30svh;margin:0}.mission-chapter>.mission-screen{order:2}.contact>.mobile-scene-slot{width:100%;height:32svh;margin:0 0 30px}.work>.mobile-scene-slot{margin:0 0 25px}
+}
+@media(max-width:360px){.craft-chapter h2{font-size:clamp(39px,12.2vw,44px)}}
+@media(min-width:761px) and (max-width:1000px){.foundation-diagram{grid-template-columns:1fr;gap:10px;margin-top:45px}.foundation-diagram strong{margin:15px 0;font-size:26px}.foundation-diagram i{width:20px;margin:0;transform:rotate(90deg)}}

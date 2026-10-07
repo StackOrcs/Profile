@@ -5,9 +5,9 @@
 
 **Format:** A long, user-controlled scroll film. The visitor controls the pace. No forced autoplay, scroll interception, timer, mandatory loading screen, or sound. Progress is expressed through composition, material depth, typography and transitions. The actual websites are the evidence.
 
-**Visual arc:** A material brand portrait → a typographic proposition → clear decisions → an exploded design stack → connected disciplines → a structural diagram → useful intelligence → trust → four real projects → human partnership → the next meaningful idea. Alternating charcoal and warm paper provide intentional contrast. Typography leads. Media provides the evidence. WebGL is reserved for identity and the craft sequence.
+**Visual arc:** A material brand portrait → a typographic proposition → clear decisions → an exploded design stack → connected disciplines → a structural diagram → useful intelligence → trust → four real projects → human partnership → the next meaningful idea. Alternating charcoal and warm paper provide intentional contrast. Typography leads. Media provides the evidence. One continuous WebGL sculpture accompanies the chapters, receding to the margin while the real projects take the stage and returning for partnership and contact.
 
-**Brand:** The supplied orange bear image stays unchanged in the navigation, favicon and social preview. A contour-derived 3D relief uses that same outline in two directed scenes. No alternative logo is introduced.
+**Brand:** The supplied orange bear image stays unchanged in the navigation, favicon and social preview. A contour-derived 3D relief uses that same outline throughout one directed sequence. No alternative logo is introduced.
 
 **How to read this document:** The full narrative below is the master script for the story and a possible future voice-over. The live experience uses the shorter screen lines and supporting copy; it does not play an audio narration. Each section's content remains available with animation disabled.
 
@@ -49,7 +49,7 @@
 
 **Full narrative:** Useful progress begins with useful questions. What business outcome should change? What is the user's real situation? Which constraints are fixed? Which risks need attention now? Which decisions cannot be postponed? StackOrcs aligns these questions before turning them into a delivery plan. The result is a shared brief, an opportunity map, and a first delivery slice that can produce evidence. A clear starting point saves the team from building an impressive answer to the wrong problem.
 
-**Direction:** Warm paper replaces charcoal. Three editorial columns describe the outcome, people and constraints. Dividing rules draw in. The shift in palette and composition signals a clearer decision-making space. No WebGL is used.
+**Direction:** Warm paper replaces charcoal. Three editorial columns describe the outcome, people and constraints. Dividing rules draw in. The shift in palette and composition signals a clearer decision-making space. The sculpture turns gently in its reserved space.
 
 **Supporting copy:** Shared brief → opportunity map → first delivery slice.
 
@@ -63,7 +63,7 @@
 
 **Full narrative:** The interface is where a person meets the system. It should make the next step understandable. It should work across screens, respect accessibility, and support the real workflow. But experience does not live alone. StackOrcs shapes experience, architecture, data, and operations together around a meaningful end-to-end path. Prototypes help teams see the choices. Design systems help those choices remain consistent. Purposeful motion makes the interaction clearer. The goal is craft with consequence: quality that improves trust and usability.
 
-**Direction:** A longer chapter holds its copy while the brand relief rotates into a controlled side profile. Its identity, experience and engineering layers separate in depth. Macro scale exposes chamfered edges and component details, then the layers align again. The physical metaphor is a connected system.
+**Direction:** A 250-viewport-percent chapter holds its copy while the brand relief begins facing the reader. Its identity, experience and engineering layers separate in depth, turn to a readable oblique angle and align again. Four caption beats follow surface, connected layers, engineering and the complete system. The front remains recognizable; the sequence does not park on an empty back plate. The physical metaphor is a connected system.
 
 **Supporting copy:** Prototype. System design. Delivery plan.
 

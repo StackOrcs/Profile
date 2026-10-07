@@ -54,16 +54,16 @@ update();
 
 async function startEnhancements() {
   if (reduced.matches) return;
+  const pending=[];
   if (!motionStarted) {
     motionStarted = true;
-    try {const {initMotion} = await import('./motion.js'); initMotion(isPaused);}
-    catch {motionStarted = false; document.body.classList.remove('motion-enabled');}
+    pending.push(import('./motion.js').then(({initMotion})=>initMotion(isPaused)).catch(()=>{motionStarted=false;document.body.classList.remove('motion-enabled');}));
   }
   if (!sceneStarted) {
     sceneStarted = true;
-    try {const {initScene} = await import('./scene.js'); await initScene({story:()=>storyPosition,isPaused});}
-    catch {document.getElementById('scene-host').dataset.scene = 'fallback';}
+    pending.push(import('./scene.js').then(({initScene})=>initScene({story:()=>storyPosition,isPaused})).catch(()=>{document.getElementById('scene-host').dataset.scene='fallback';document.body.classList.add('scene-failed');}));
   }
+  await Promise.all(pending);
 }
 // Core content and project images take priority. 3D/motion arrive independently.
 if ('requestIdleCallback' in window) requestIdleCallback(startEnhancements, {timeout:900});

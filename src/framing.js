@@ -2,11 +2,16 @@ import {Box3,Vector3,MathUtils} from 'three';
 
 // Continuous cubic poses preserve velocity across chapter boundaries.
 export function samplePose(poses,position){
-  const index=Math.min(poses.length-2,Math.floor(position)),t=position-index;
-  return poses[index].map((_,axis)=>{
-    const p0=poses[Math.max(0,index-1)][axis],p1=poses[index][axis];
-    const p2=poses[index+1][axis],p3=poses[Math.min(poses.length-1,index+2)][axis];
-    return .5*((2*p1)+(-p0+p2)*t+(2*p0-5*p1+4*p2-p3)*t*t+(-p0+3*p1-3*p2+p3)*t*t*t);
+  const point=MathUtils.clamp(position,poses[0].at,poses.at(-1).at);
+  let index=0;
+  while(index<poses.length-2&&point>poses[index+1].at)index++;
+  const first=poses[index],last=poses[index+1],duration=last.at-first.at;
+  const before=poses[Math.max(0,index-1)],after=poses[Math.min(poses.length-1,index+2)];
+  const t=(point-first.at)/duration,t2=t*t,t3=t2*t;
+  return first.pose.map((value,axis)=>{
+    const v1=(last.pose[axis]-before.pose[axis])/(last.at-before.at);
+    const v2=(after.pose[axis]-value)/(after.at-first.at);
+    return (2*t3-3*t2+1)*value+(t3-2*t2+t)*duration*v1+(-2*t3+3*t2)*last.pose[axis]+(t3-t2)*duration*v2;
   });
 }
 
