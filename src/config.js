@@ -3,6 +3,12 @@ export const motion = {
   revealDuration:.62, revealStagger:.025, revealEase:'power3.out',
   scrub:.22, mediaTilt:4, mediaParallax:30, pointerAmount:.15
 };
+export const transitions = {
+  desktopBands:5, mobileBands:3, scrub:.24,
+  mediaTilt:6, mobileMediaTilt:2, mediaTravel:26,
+  apertureDuration:.68, apertureStagger:.065,
+  headlineTurn:64, headlineStagger:.045
+};
 export const ending = {
   approachViewport:.75,moveUntil:.28,zoomStart:.12,zoomEnd:.82,
   desktopZoom:9,mobileZoom:4.8,
