@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+await build({absWorkingDir:root,entryPoints:['src/sound-entry.js'],bundle:true,format:'iife',target:['es2022'],outfile:'sound.js',minify:true,logLevel:'info'});
 await import('./slice-brand.mjs');
 const result = await build({
   absWorkingDir:root,entryPoints:[path.join(root,'src/experience.js')],bundle:true,splitting:true,

@@ -1,4 +1,3 @@
-import {initSound} from './sound.js';
 import {initCursor} from './cursor.js';
 import {ending as endingSettings} from './config.js';
 
@@ -78,7 +77,6 @@ document.addEventListener('visibilitychange', () => document.documentElement.cla
 reduced.addEventListener('change', () => {syncMotion(); startEnhancements();});
 syncMotion();
 update();
-initSound();
 initCursor();
 
 // A brief fabric reveal gives the experience a deliberate opening beat.
