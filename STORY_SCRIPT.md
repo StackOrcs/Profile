@@ -217,7 +217,7 @@
 
 **Primary action:** Talk on WhatsApp — +91 8303165648.
 
-**Other routes:** Start a project on stackorcs.com, email info@stackorcs.com, Instagram @stackorcs, LinkedIn StackOrcs, X @stackorcs, or share the journey. A concise directory links to the original site's services, approach, work, insights, company, and trust pages.
+**Other routes:** Start a project on stackorcs.com, email admin@stackorcs.com, Instagram @stackorcs, LinkedIn StackOrcs, X @stackorcs, or share the journey. A concise directory links to the original site's services, approach, work, insights, company, and trust pages.
 
 **Final line:** “Bring the ambition. Tell us the constraints. Let's find the right next step.”
 
